@@ -8,7 +8,7 @@ import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxAppBasecompatActivity
  * Created by Administrator on 2016-10-09.
  * ClassName: com.wuz.bofangqi.wuzbofangqi.wuzeng.activity
  * Author:Administrator
- * Fuction:
+ * Fuction: 主界面
  * UpdateUser:
  * UpdateDate:
  */
