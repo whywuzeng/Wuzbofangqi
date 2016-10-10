@@ -7,4 +7,10 @@
     <color name="theme_color_primary">#fb7299</color>
     <color name="theme_color_primary_dark">#b85671</color>
     <color name="theme_color_primary_trans">#99f0486c</color>
+
+    <color name="navigation_background_light">#FFF8F8F8</color>
+
+    <color name="nav_head_image_background">#F8668D</color>
+
+    <color name="nav_head_roung_text_background">#FB7BA0</color>
 </resources>

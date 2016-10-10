@@ -11,6 +11,9 @@
     tools:context=".wuzeng.SplashMainActivity">
 
     <TextView
+
+        android:id="@+id/tv_hellowd"
+        android:gravity="center"
         android:text="Hello World!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

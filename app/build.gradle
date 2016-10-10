@@ -23,6 +23,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.1'
+    //哪些包裹的布局 很多常用的布局的库
+    compile 'com.android.support:design:24.2.0'
     //butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
     //Rxjava
