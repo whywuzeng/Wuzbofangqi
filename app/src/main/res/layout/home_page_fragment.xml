@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/home_toolbar"
+                android:background="@color/theme_color_primary"
+                app:contentInsetStart="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ic_drawer_home"
+                        android:id="@+id/home_toolbar_itembtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.CircleImageView
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ic_hotbitmapgg_avatar"
+                        android:id="@+id/home_toolbar_user_avatar"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        app:border_width="1dp"
+                        app:border_color="@android:color/white"
+                        />
+
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:textSize="13sp"
+                        android:textColor="@android:color/white"
+                        android:text="wuzeng"
+                        android:id="@+id/home_toolbar_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </android.support.v7.widget.Toolbar>
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/sliding_tabs"
+                android:background="@color/theme_color_primary"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:tl_indicator_corner_radius="1dp"
+                app:tl_indicator_height="2dp"
+                app:tl_indicator_width="40dp"
+                app:tl_tab_space_equal="true"
+                >
+            </com.flyco.tablayout.SlidingTabLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.NoScrollViewPager
+            android:id="@+id/view_page"
+            android:layout_width="match_parent"
+            android:overScrollMode="never"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+        </com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.NoScrollViewPager>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <com.miguelcatalan.materialsearchview.MaterialSearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.miguelcatalan.materialsearchview.MaterialSearchView>
+
+</FrameLayout>

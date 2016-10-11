@@ -13,4 +13,6 @@
     <color name="nav_head_image_background">#F8668D</color>
 
     <color name="nav_head_roung_text_background">#FB7BA0</color>
+
+    <color name="gray_light">#dcdcdc</color>
 </resources>
