@@ -3,12 +3,18 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxLazeFragment;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.LiveIndex;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.network.RetrofitHelper;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.CustomEmptyView;
 
 import butterknife.Bind;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2016-10-11.
@@ -75,12 +81,38 @@ public class HomeLiveFragment extends RxLazeFragment {
             }
         });
 
-
     }
 
     public void getBiliBiliLive()
     {
+        RetrofitHelper.getBiliLiveServiceApi()
+                .getLiveIndex()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .compose(this.bindToLifecycle())
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e("tag", "onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("tag", "onError");
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+                        Log.e("tag", "onCompleted");
+                        finishTask(o);
+                    }
+                });
+    }
+
+    private void finishTask(Object o) {
+        LiveIndex liveIndex = (LiveIndex) o;
 
     }
+
 
 }

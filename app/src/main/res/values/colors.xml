@@ -15,4 +15,6 @@
     <color name="nav_head_roung_text_background">#FB7BA0</color>
 
     <color name="gray_light">#dcdcdc</color>
+
+    <color name="font_normal">#555555</color>
 </resources>

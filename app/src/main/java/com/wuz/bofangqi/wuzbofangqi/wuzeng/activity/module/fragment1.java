@@ -3,6 +3,7 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,12 @@ import android.widget.TextView;
 
 import com.trello.rxlifecycle.components.support.RxFragment;
 import com.wuz.bofangqi.wuzbofangqi.R;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.LiveIndex;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.network.RetrofitHelper;
+
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2016-10-10.
@@ -56,6 +63,33 @@ public class fragment1  extends RxFragment {
     private void initView(View inflate) {
         tv_middle_context=(TextView)inflate.findViewById(R.id.tv_middle_context);
         tv_middle_context.setText(number);
+
+        RetrofitHelper.getBiliLiveServiceApi().getLiveIndex()
+                .compose(this.bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e("tag", "onCompleted");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("tag", "onCompleted");
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+                        Log.e("tag", "onCompleted");
+                        finishTask(o);
+                    }
+                });
+    }
+
+    private void finishTask(Object o) {
+        LiveIndex liveIndex = (LiveIndex) o;
+
     }
 
 }

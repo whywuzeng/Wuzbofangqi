@@ -12,6 +12,7 @@ import java.util.List;
  * UpdateUser:
  * UpdateDate:
  */
+
 public class LiveIndex {
 
 
@@ -27,8 +28,6 @@ public class LiveIndex {
     public static class DataEntity {
 
 
-        @SerializedName("recommend_data")
-        public RecommendDataEntity recommendData;
         /**
          * title : 万物皆可萌！省份拟人形象征集~
          * img : http://i0.hdslb.com/bfs/live/c4c45e1b7baa553820ee15ef7f60f8d2ad529796.jpg
@@ -38,6 +37,7 @@ public class LiveIndex {
 
         @SerializedName("banner")
         public List<BannerEntity> banner;
+
         /**
          * id : 11
          * name : 手机直播
@@ -46,8 +46,12 @@ public class LiveIndex {
 
         @SerializedName("entranceIcons")
         public List<EntranceIconsEntity> entranceIcons;
+
         @SerializedName("partitions")
         public List<RecommendDataEntity> partitions;
+
+        @SerializedName("recommend_data")
+        public RecommendDataEntity recommendData;
 
         public static class RecommendDataEntity {
             /**
@@ -77,8 +81,9 @@ public class LiveIndex {
 
             @SerializedName("lives")
             public List<LivesEntity> lives;
-            @SerializedName("banner_data")
-            public List<List<LivesEntity>> bannerData;
+
+//            @SerializedName("banner_data")
+//            public List<List<LivesEntity>> bannerData;
 
             public static class PartitionEntity {
                 @SerializedName("id")

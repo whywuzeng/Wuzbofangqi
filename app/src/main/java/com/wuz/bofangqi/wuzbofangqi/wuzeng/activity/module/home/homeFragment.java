@@ -75,5 +75,10 @@ public class homeFragment extends RxLazeFragment {
         return R.layout.home_page_fragment;
     }
 
+    @Override
+    protected void onlazyLoad() {
+
+    }
+
 
 }
