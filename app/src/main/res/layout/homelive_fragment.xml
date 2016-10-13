@@ -21,6 +21,7 @@
         <com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.CustomEmptyView
             android:id="@+id/empty_layout"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="center"
             android:layout_height="wrap_content">
         </com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.CustomEmptyView>

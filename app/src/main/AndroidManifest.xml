@@ -25,6 +25,10 @@
 
         <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.MainActivity">
         </activity>
+
+        <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.Live.LivePlayActivity">
+        </activity>
+
     </application>
 
 </manifest>

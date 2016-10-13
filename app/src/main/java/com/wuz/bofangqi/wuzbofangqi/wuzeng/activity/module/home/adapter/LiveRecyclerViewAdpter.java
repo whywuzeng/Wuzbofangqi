@@ -1,5 +1,6 @@
 package com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,9 +12,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.wuz.bofangqi.wuzbofangqi.R;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.Live.LivePlayActivity;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.LiveIndex;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.CircleImageView;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.banner.BannerEntity;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.banner.BannerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +37,8 @@ public class LiveRecyclerViewAdpter extends RecyclerView.Adapter {
     private Context mContext;
 
     private LiveIndex mLiveIndex;
+
+    private  List<BannerEntity> bannerlist;
 
     public static final int ENTRANCEICONS_TYPE = 0x1111;
 
@@ -62,64 +70,138 @@ public class LiveRecyclerViewAdpter extends RecyclerView.Adapter {
                 view = LayoutInflater.from(mContext).inflate(R.layout.item_live_banner, parent, false);
                 return new BannerViewHolder(view);
         }
-
         return null;
     }
 
-    public void setmLiveIndex(LiveIndex liveIndex)
-    {
-        this.mLiveIndex=liveIndex;
+    public void setmLiveIndex(LiveIndex liveIndex) {
+        this.mLiveIndex = liveIndex;
 
-
+       bannerlist=new ArrayList<>();
+      for (int i=0;i<mLiveIndex.data.banner.size();i++)
+      {
+          BannerEntity mBannerEntity=new BannerEntity();
+          mBannerEntity.title=mLiveIndex.data.banner.get(i).title;
+          mBannerEntity.img=mLiveIndex.data.banner.get(i).img;
+          mBannerEntity.link=mLiveIndex.data.banner.get(i).link;
+          bannerlist.add(mBannerEntity);
+      }
+        notifyDataSetChanged();
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof BannerViewHolder)
-        {
-
-
+        if (holder instanceof BannerViewHolder) {
+            ((BannerViewHolder)holder).itemLiveBanner.delayTime(5).build(bannerlist);
         }
-        if (holder instanceof EntranceViewHolder)
-        {
+        if (holder instanceof EntranceViewHolder) {
             Glide.with(mContext).load(mLiveIndex.data.banner.get(position).img)
-                    .into( ((EntranceViewHolder) holder).liveEntranceImage);
+                    .into(((EntranceViewHolder) holder).liveEntranceImage);
             ((EntranceViewHolder) holder).liveEntranceTitle.setText(mLiveIndex.data.banner.get(position).title);
         }
-        if (holder instanceof PatitionTitleViewHolder)
-        {
-            position-=2;
-            mLiveIndex.data.partitions.get(position)
+        if (holder instanceof PatitionTitleViewHolder) {
+        /*    @Bind(R.id.item_live_patition_icon)
+            ImageView itemLivePatitionIcon;
+            @Bind(R.id.item_live_patition_title)
+            TextView itemLivePatitionTitle;
+            @Bind(R.id.item_live_patition_count)
+            TextView itemLivePatitionCount;*/
+            position -= 2;
+
+            Glide.with(mContext).load(mLiveIndex.data.partitions.get(Math.abs(position / 5)).partition.subIcon.src)
+                    .into(((PatitionTitleViewHolder) holder).itemLivePatitionIcon);
+            ((PatitionTitleViewHolder) holder).itemLivePatitionTitle.setText(mLiveIndex.data.partitions.get(Math.abs(position / 5)).partition.name);
+            ((PatitionTitleViewHolder) holder).itemLivePatitionCount.setText(mLiveIndex.data.partitions.get(Math.abs(position / 5)).partition.count+"");
+        }
+
+        if (holder instanceof PartitionViewHolder) {
+            /*@Bind(R.id.circle_image)
+            CircleImageView circleImage;
+            @Bind(R.id.tv_partition_context)
+            TextView tvPartitionContext;
+            @Bind(R.id.item_live_user_name)
+            TextView itemLiveUserName;
+            @Bind(R.id.item_live_count)
+            TextView itemLiveCount;
+            @Bind(R.id.item_live_layout)
+            CardView itemLiveLayout;*/
+
+            position -= 2;
+            Glide.with(mContext).load(mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5).cover.src)
+                    .into(((PartitionViewHolder) holder).circleImage);
+            ((PartitionViewHolder) holder).tvPartitionContext.setText(mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5).title);
+
+            ((PartitionViewHolder) holder).itemLiveUserName.setText(mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5).owner.name);
+
+            ((PartitionViewHolder) holder).itemLiveCount.setText(mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5).online+"");
+
+            Glide.with(mContext).load(mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5).owner.face)
+                    .into(((PartitionViewHolder) holder).imageLivePartitionMiddle);
+            ((PartitionViewHolder) holder).itemLiveLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LivePlayActivity.Launcher((Activity)mContext);
+                }
+            });
         }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        int size=0;
+        if (mLiveIndex!=null)
+        {
+            if (mLiveIndex.data.banner!=null&&mLiveIndex.data.banner.size()>0)
+            {
+                size++;
+            }
+
+            if (mLiveIndex.data.entranceIcons!=null&&mLiveIndex.data.entranceIcons.size()>0)
+            {
+                size++;
+            }
+
+            size=size+5*(mLiveIndex.data.partitions.size());
+        }
+        return size;
     }
 
     @Override
     public int getItemViewType(int position) {
 
-        if (position==0)
-        {
+        if (position == 0) {
             return BANNER_TYPE;
         }
-        if (position==1)
-        {
+        if (position == 1) {
             return ENTRANCEICONS_TYPE;
         }
-        position-=2;
+        if (position>=2) {
+            position -= 2;
 
-        if (position%5==0) {
-           return PARTITION_TITLE_TYPE;
+            if (position % 5 == 0) {
+                return PARTITION_TITLE_TYPE;
+            }
+            else {
+                return LIVES_PARTITION_TYPE;
+            }
         }else {
-            return LIVES_PARTITION_TYPE;
+            return 0;
         }
     }
 
-    public int getSpanSize(int pos)
-    {
+    public int getSpanSize(int pos) {
+        int itemViewType = getItemViewType(pos);
+
+       switch (itemViewType)
+       {
+           case BANNER_TYPE:
+               return 12;
+           case ENTRANCEICONS_TYPE:
+               return 3;
+           case PARTITION_TITLE_TYPE:
+               return 12;
+           case LIVES_PARTITION_TYPE:
+               return 6;
+       }
         return 0;
     }
 
@@ -152,6 +234,8 @@ public class LiveRecyclerViewAdpter extends RecyclerView.Adapter {
     }
 
     class PartitionViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.image_live_partition_middle)
+        ImageView imageLivePartitionMiddle;
         @Bind(R.id.circle_image)
         CircleImageView circleImage;
         @Bind(R.id.tv_partition_context)
@@ -170,14 +254,15 @@ public class LiveRecyclerViewAdpter extends RecyclerView.Adapter {
     }
 
 
-     class BannerViewHolder extends RecyclerView.ViewHolder{
+    class BannerViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.item_live_banner)
         BannerView itemLiveBanner;
 
-         public BannerViewHolder(View itemView) {
-             super(itemView);
-             ButterKnife.bind(this, itemView);
-         }
+        public BannerViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
 
     }
+
 }

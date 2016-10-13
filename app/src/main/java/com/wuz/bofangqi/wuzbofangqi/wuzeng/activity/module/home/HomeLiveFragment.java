@@ -2,11 +2,14 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxLazeFragment;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.adapter.LiveRecyclerViewAdpter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.LiveIndex;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.network.RetrofitHelper;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.CustomEmptyView;
@@ -33,6 +36,7 @@ public class HomeLiveFragment extends RxLazeFragment {
     CustomEmptyView emptyLayout;
     @Bind(R.id.homelive_swipe_refresh_layout)
     SwipeRefreshLayout homeliveSwipeRefreshLayout;
+    private LiveRecyclerViewAdpter mliveRecyclerViewAdpter;
 
 
     public static HomeLiveFragment newInstance() {
@@ -45,7 +49,8 @@ public class HomeLiveFragment extends RxLazeFragment {
 
     @Override
     protected void OnViewCreateFinish(Bundle savedInstanceState) {
-
+        showProgressBar();
+        initRecyclerView();
     }
 
     @Override
@@ -56,12 +61,23 @@ public class HomeLiveFragment extends RxLazeFragment {
     @Override
     protected void onlazyLoad() {
 
-        showProgressBar();
-        initRecyclerView();
+
     }
 
     private void initRecyclerView() {
+        mliveRecyclerViewAdpter = new LiveRecyclerViewAdpter(getActivity());
+        recyle.setAdapter(mliveRecyclerViewAdpter);
+        GridLayoutManager manager = new GridLayoutManager(this.getActivity(), 12);
 
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+
+                return mliveRecyclerViewAdpter.getSpanSize(position);
+            }
+        });
+        recyle.setLayoutManager(manager);
     }
 
     private void showProgressBar() {
@@ -94,11 +110,13 @@ public class HomeLiveFragment extends RxLazeFragment {
                     @Override
                     public void onCompleted() {
                         Log.e("tag", "onCompleted");
+                        homeliveSwipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.e("tag", "onError");
+                        homeliveSwipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
@@ -111,7 +129,7 @@ public class HomeLiveFragment extends RxLazeFragment {
 
     private void finishTask(Object o) {
         LiveIndex liveIndex = (LiveIndex) o;
-
+        mliveRecyclerViewAdpter.setmLiveIndex(liveIndex);
     }
 
 

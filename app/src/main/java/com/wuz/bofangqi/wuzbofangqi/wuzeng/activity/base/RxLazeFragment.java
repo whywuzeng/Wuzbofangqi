@@ -32,6 +32,7 @@ public abstract class RxLazeFragment extends RxFragment {
 
       parentView=  inflater.inflate(getLayoutID(),container,false);
 
+        ButterKnife.bind(this,parentView);
         return parentView;
     }
 
@@ -39,7 +40,7 @@ public abstract class RxLazeFragment extends RxFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         OnViewCreateFinish(savedInstanceState);
-        ButterKnife.bind(this,view);
+
     }
 
     protected abstract void OnViewCreateFinish(Bundle savedInstanceState);
