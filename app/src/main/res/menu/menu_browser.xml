@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_share"
+        android:orderInCategory="100"
+        android:title="分享"
+        android:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_browser"
+        android:orderInCategory="100"
+        android:title="分享到浏览器"
+        android:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_copy"
+        android:orderInCategory="100"
+        android:title="复制"
+        android:showAsAction="never"/>
+
+</menu>
