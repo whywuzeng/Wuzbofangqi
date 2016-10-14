@@ -17,4 +17,6 @@
     <color name="gray_light">#dcdcdc</color>
 
     <color name="font_normal">#555555</color>
+
+    <color name="line_bg">#e6e6e6</color>
 </resources>

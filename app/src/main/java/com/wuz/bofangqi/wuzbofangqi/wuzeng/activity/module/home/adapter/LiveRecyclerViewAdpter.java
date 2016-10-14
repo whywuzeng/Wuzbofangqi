@@ -132,14 +132,18 @@ public class LiveRecyclerViewAdpter extends RecyclerView.Adapter {
 
             ((PartitionViewHolder) holder).itemLiveUserName.setText(mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5).owner.name);
 
-            ((PartitionViewHolder) holder).itemLiveCount.setText(mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5).online+"");
+            ((PartitionViewHolder) holder).itemLiveCount.setText(mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5).online + "");
 
             Glide.with(mContext).load(mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5).owner.face)
                     .into(((PartitionViewHolder) holder).imageLivePartitionMiddle);
+          final int cid=  mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5).roomId;
+
+            final LiveIndex.DataEntity.RecommendDataEntity.LivesEntity livesEntity = mLiveIndex.data.partitions.get(Math.abs(position / 5)).lives.get(position % 5);
+
             ((PartitionViewHolder) holder).itemLiveLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    LivePlayActivity.Launcher((Activity)mContext);
+                    LivePlayActivity.Launcher((Activity)mContext,cid,livesEntity.title,livesEntity.cover.src,livesEntity.owner.name,livesEntity.online);
                 }
             });
         }

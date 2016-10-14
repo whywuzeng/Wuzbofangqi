@@ -11,6 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="280dp">
 
+        <SurfaceView
+            android:id="@+id/video_view"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
         <ImageView
             android:src="@drawable/ic_watermark_live_large"
             android:layout_width="wrap_content"
@@ -29,6 +35,7 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/bili_anim_loadtv"
                     android:layout_width="wrap_content"
                     android:text="播放器播放中..."
                     android:textSize="12sp"
@@ -47,12 +54,53 @@
         android:layout_height="70dp">
 
         <com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.CircleImageView
-            android:src="@drawable/"
+            android:id="@+id/circle_avator_img"
+            android:src="@mipmap/ico_user_default"
             app:border_color="@android:color/white"
+            android:padding="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
             app:border_width="1dp"
             android:layout_width="45dp"
             android:layout_height="45dp"/>
+        
+        <TextView
+            android:id="@+id/tv_livesdetails_username"
+            android:layout_marginStart="7dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/font_normal"
+            android:textSize="12sp"
+            android:text="UserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_live_count"
+            android:text="33"
+            android:drawableStart="@drawable/ic_watching"
+            android:textSize="12sp"
+            android:drawablePadding="5dp"
+            android:layout_marginStart="7dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/font_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textColor="@color/font_normal"
+            android:textSize="14sp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:background="@drawable/attention_lives_detail_bg"
+            android:layout_marginStart="160dp"
+            android:text="+关注"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_bg"/>
 </LinearLayout>

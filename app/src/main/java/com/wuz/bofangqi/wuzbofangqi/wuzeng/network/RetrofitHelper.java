@@ -50,6 +50,16 @@ public class RetrofitHelper {
 
     }
 
+    public static BiliLiveService getBiliLiveUrlApi()
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(LIVE_BASE_URL)
+                .client(mOkHttpClient)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return build.create(BiliLiveService.class);
+    }
+
     private static void initOkHttpClient() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//全部都显示了
