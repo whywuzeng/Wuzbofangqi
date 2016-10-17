@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:overScrollMode="never"
+            android:paddingBottom="10dp"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="1dp"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:id="@+id/search_view"
+                android:layout_gravity="center|start"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_hint_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/search_edit"
+                android:layout_width="match_parent"
+                android:layout_gravity="center|end"
+                android:layout_marginStart="40dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textSize="14sp"
+                android:text="这里是搜索的内容"
+                android:textColor="@color/black_alpha_45"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:id="@+id/search_img"
+                android:layout_gravity="center|end"
+                android:clickable="true"
+                android:padding="10dp"
+                android:src="@drawable/ic_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_margin="6dp"
+            android:text="大家都在搜"
+            android:textSize="15sp"
+            android:textColor="@color/black_alpha_45"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/tags_layout"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            app:max_select="-1"
+            android:layout_height="wrap_content">
+        </com.zhy.view.flowlayout.TagFlowLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:overScrollMode="never"
+            android:visibility="gone"
+            android:id="@+id/hide_scroll_view"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp">
+
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/hide_tags_layout"
+                android:padding="10dp"
+                app:max_select="-1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/more_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:clickable="true"
+            >
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/gray_light"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:drawableStart="@drawable/ic_arrow_down_gray_round"
+                android:text="加载更多"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_width="0dp"
+                android:background="@color/gray_light"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@android:color/white"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginTop="20dp"
+            >
+            <ImageView
+                android:id="@+id/img_inter"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_quanzi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="兴趣圈"
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/img_inter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <View
+            android:background="@color/window_background"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
