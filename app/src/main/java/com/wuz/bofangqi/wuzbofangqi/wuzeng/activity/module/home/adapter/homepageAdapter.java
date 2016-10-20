@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.HomeLiveFragment;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.discover.HomeDiscoverFragment;
 
 /**
  * Created by Administrator on 2016-10-11.
@@ -39,6 +40,8 @@ public class homepageAdapter extends FragmentPagerAdapter {
                 case 0:
                     fragments[position]= HomeLiveFragment.newInstance();
                     break;
+                case  1:
+                    fragments[position]= HomeDiscoverFragment.newInstance();
             }
         }
         return fragments[position];

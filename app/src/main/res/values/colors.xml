@@ -24,4 +24,6 @@
 
     <color name="window_background">#eaeaea</color>
 
+    <color name="black_alpha_60">#4f000000</color>
+
 </resources>

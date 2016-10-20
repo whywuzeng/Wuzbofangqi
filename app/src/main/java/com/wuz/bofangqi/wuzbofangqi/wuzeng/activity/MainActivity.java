@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxAppBasecompatActivity;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.fragment1;
-import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.HomeLiveFragment;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.homeFragment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.CircleImageView;
 
 /**
@@ -63,12 +63,12 @@ public class MainActivity extends RxAppBasecompatActivity implements NavigationV
 
     private void initFragments() {
         fragment1 fragment1 = com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.fragment1.newInstance(1 + "");
-        HomeLiveFragment homeLiveFragment = HomeLiveFragment.newInstance();
+        homeFragment homeFragment = com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.homeFragment.newInstance();
         fragment1 fragment3 = com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.fragment1.newInstance(3 + "");
         fragment1 fragment4 = com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.fragment1.newInstance(4 + "");
 
         fragments=new Fragment[]{
-            fragment1,homeLiveFragment,fragment3,fragment4
+            fragment1,homeFragment,fragment3,fragment4
         };
 
         getSupportFragmentManager().beginTransaction()

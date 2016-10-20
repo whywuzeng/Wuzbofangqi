@@ -2,6 +2,8 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.network;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.App.OhMyWuzZhibo;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.hotTagsSearch;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.network.Api.BiliLiveService;
 
 import java.io.File;
@@ -17,6 +19,9 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2016-10-12.
@@ -30,7 +35,11 @@ public class RetrofitHelper {
 
     private static OkHttpClient mOkHttpClient;
 
+    public static final String BASE_SEARCH_URL="http://bilibili-service.daoapp.io/";
+
     private static final String LIVE_BASE_URL = "http://live.bilibili.com/";
+
+    public static final String HOT_SEARCH="http://s.search.bilibili.com/";
 
     public static final String USERAGENT="Ohjiushigan Android Client/2.1 (jiushiqiangone@sina.com)";
 
@@ -58,6 +67,31 @@ public class RetrofitHelper {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         return build.create(BiliLiveService.class);
+    }
+
+    public static Observable<hotTagsSearch> getHotTagsSearch()
+    {
+        Retrofit build = new Retrofit.Builder().baseUrl(HOT_SEARCH)
+                .client(mOkHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<hotTagsSearch> hotTagsSearchObservable = build.create(BiliLiveService.class).getHotTagsSearch();
+
+        return hotTagsSearchObservable;
+    }
+
+    public static Observable<SearchResult> getSearchResult(String content,int page,int count)
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_SEARCH_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<SearchResult> searchResultObservable = build.create(BiliLiveService.class).getSearchResult(content, page, count)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+        return searchResultObservable;
     }
 
     private static void initOkHttpClient() {

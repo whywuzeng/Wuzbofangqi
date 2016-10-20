@@ -10,6 +10,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.MainActivity;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxLazeFragment;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.adapter.homepageAdapter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.CircleImageView;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.NoScrollViewPager;
 
@@ -58,7 +59,11 @@ public class homeFragment extends RxLazeFragment {
 
     private void initViewPager() {
 
-
+        homepageAdapter homepageAdapter = new homepageAdapter(getChildFragmentManager(), getActivity());
+        viewPage.setOffscreenPageLimit(2);
+        viewPage.setAdapter(homepageAdapter);
+        slidingTabs.setViewPager(viewPage);
+        viewPage.setCurrentItem(1);
     }
 
     private void initSearchView() {

@@ -29,6 +29,8 @@
         <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.Live.LivePlayActivity">
         </activity>
 
+        <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.search.TotalStatetionSearchActivity">
+        </activity>
     </application>
 
 </manifest>

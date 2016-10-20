@@ -88,8 +88,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
             android:clickable="true"
+            android:orientation="horizontal"
             >
 
             <View
@@ -99,6 +99,7 @@
                 android:layout_weight="1"
                 />
             <TextView
+                android:id="@+id/tv_load_more"
                 android:drawableStart="@drawable/ic_arrow_down_gray_round"
                 android:text="加载更多"
                 android:textSize="14sp"
@@ -114,6 +115,7 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_interest"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:background="@android:color/white"
@@ -136,6 +138,183 @@
                 android:layout_toRightOf="@id/img_inter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <View
+            android:background="@color/window_background"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_topic"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@android:color/white"
+            android:foreground="?attr/selectableItemBackground"
+            >
+            <ImageView
+                android:id="@+id/img_inter_1"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_header_topic_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="话题中心"
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/img_inter_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <View
+            android:background="@color/window_background"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_activity_center"
+            android:background="@android:color/white"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="46dp">
+
+            <ImageView
+                android:layout_marginStart="10dp"
+                android:id="@+id/img_inter_2"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_header_activity_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/img_inter_2"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:text="活动中心"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_original"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@android:color/white"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginTop="20dp"
+            >
+            <ImageView
+                android:id="@+id/img_inter_3"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_btn_rank_original"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="原创排行榜"
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/img_inter_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/right_arrow"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_gray_arrow_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <View
+            android:background="@color/window_background"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_region_list"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@android:color/white"
+            android:foreground="?attr/selectableItemBackground"
+            >
+            <ImageView
+                android:id="@+id/img_inter_4"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_btn_rank_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="全区排行榜"
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/img_inter_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/right_arrow"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_gray_arrow_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <View
+            android:background="@color/window_background"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_game_center"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@android:color/white"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginTop="20dp"
+            >
+            <ImageView
+                android:id="@+id/img_inter_3"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_btn_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="游戏中心"
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/img_inter_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="10dp"
+                android:text="这是wuzeng的Item"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         </RelativeLayout>
 
         <View
