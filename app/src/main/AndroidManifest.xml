@@ -31,6 +31,8 @@
 
         <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.search.TotalStatetionSearchActivity">
         </activity>
+
+        <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.VideoDetail.VideoDetailActivity"/>
     </application>
 
 </manifest>

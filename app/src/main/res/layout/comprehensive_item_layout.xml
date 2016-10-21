@@ -7,6 +7,8 @@
     app:cardBackgroundColor="@color/gray_light"
     app:cardElevation="3dp"
     android:layout_width="match_parent"
+    android:id="@+id/card_view"
+    android:clickable="true"
     android:layout_height="wrap_content">
 <LinearLayout
     android:orientation="horizontal"

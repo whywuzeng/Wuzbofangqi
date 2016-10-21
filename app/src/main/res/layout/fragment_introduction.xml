@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_marginLeft="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="230dp">
+
+        <TextView
+            android:id="@+id/tv_title_big"
+            android:textColor="@android:color/black"
+            style="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textSize="17sp"
+            android:layout_alignParentTop="true"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_marginTop="3dp"
+            android:layout_alignLeft="@id/tv_title_big"
+            android:textColor="@color/font_normal"
+            android:text="wuzeng"
+            android:layout_marginBottom="10dp"
+            android:drawableStart="@drawable/icon_up"
+            android:drawablePadding="10dp"
+            android:layout_above="@+id/ll_bottom_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_above="@+id/tv_introduction_content"
+            android:id="@+id/ll_bottom_layout"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_palynum"
+                android:textColor="@color/font_normal"
+                android:text="wuzeng"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_play_circle_outline_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/tv_comment_subtitle"
+                android:textColor="@color/font_normal"
+                android:text="wuzeng"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_subtitles_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_above="@+id/ll_bottom_fourlayout"
+            android:id="@+id/tv_introduction_content"
+            android:layout_margin="3dp"
+            android:textSize="15sp"
+            android:textColor="@color/font_normal"
+            android:text="第三空间考了多少--------------wuzneg-------"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_fourlayout"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:gravity="center"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageButton
+                    android:background="@drawable/daily_video_action_bg"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_share_green"
+                    android:clickable="false"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/black"
+                    android:text="分享"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageButton
+                    android:background="@drawable/daily_video_action_bg"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_coin"
+                    android:clickable="false"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/black"
+                    android:text="投硬币"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageButton
+                    android:background="@drawable/daily_video_action_bg"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_collect"
+                    android:clickable="false"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/black"
+                    android:text="收藏"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:padding="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageButton
+                    android:background="@drawable/daily_video_action_bg"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_download"
+                    android:clickable="false"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/black"
+                    android:text="缓存"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_light"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_height="wrap_content">
+
+            <com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.UserTagView
+                android:id="@+id/author_tag"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="+wuzeng"
+                android:clickable="true"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textColor="@color/focus_text_color"
+                android:background="@drawable/corner_bg"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

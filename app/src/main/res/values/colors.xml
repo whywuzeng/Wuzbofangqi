@@ -16,6 +16,8 @@
 
     <color name="gray_light">#dcdcdc</color>
 
+    <color name="focus_text_color">#fb7299</color>
+
     <color name="font_normal">#555555</color>
 
     <color name="line_bg">#e6e6e6</color>
@@ -25,5 +27,7 @@
     <color name="window_background">#eaeaea</color>
 
     <color name="black_alpha_60">#4f000000</color>
+
+    <color name="gray_20">#B3B3B3</color>
 
 </resources>

@@ -1,6 +1,8 @@
 package com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.search.adpter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.wuz.bofangqi.wuzbofangqi.R;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.VideoDetail.VideoDetailActivity;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
 
 import java.util.ArrayList;
@@ -30,15 +33,13 @@ public class ComprehensiveAdapter extends RecyclerView.Adapter<ComprehensiveAdap
 
     private Context mContext;
 
-    private  List<SearchResult.ResultBean.Video1Bean> mvideo1=new ArrayList<>();
+    private List<SearchResult.ResultBean.Video1Bean> mvideo1 = new ArrayList<>();
 
-    public ComprehensiveAdapter(Context mContext)
-    {
+    public ComprehensiveAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    public void setAllData(SearchResult.ResultBean mResultBean)
-    {
+    public void setAllData(SearchResult.ResultBean mResultBean) {
         mvideo1.clear();
         mvideo1.addAll(mResultBean.video1);
         notifyDataSetChanged();
@@ -54,17 +55,29 @@ public class ComprehensiveAdapter extends RecyclerView.Adapter<ComprehensiveAdap
 
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         Glide.with(mContext)
                 .load(mvideo1.get(position).pic).into(holder.imgOverBigpic);
         //【LexBurner  】14分钟带你了解fate英灵的前  世
         holder.tvTitleBig.setText(mvideo1.get(position).title);
         //play
-        holder.tvPalynum.setText(mvideo1.get(position).play+"");
-                //author
+        holder.tvPalynum.setText(mvideo1.get(position).play + "");
+        //author
         holder.tvAuthor.setText(mvideo1.get(position).author);
         //favorites
-        holder.tvCommentSubtitle.setText(mvideo1.get(position).favorites+"");
+        holder.tvCommentSubtitle.setText(mvideo1.get(position).favorites + "");
+
+        final SearchResult.ResultBean.Video1Bean video1Bean = mvideo1.get(position);
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转到视频详情页面
+                SearchResult.ResultBean.Video1Bean video2Bean =video1Bean;
+                VideoDetailActivity.launch((Activity)mContext,Integer.valueOf(video2Bean.aid),video2Bean.pic);
+            }
+        });
+
     }
 
     @Override
@@ -84,6 +97,8 @@ public class ComprehensiveAdapter extends RecyclerView.Adapter<ComprehensiveAdap
         TextView tvPalynum;
         @Bind(R.id.tv_comment_subtitle)
         TextView tvCommentSubtitle;
+        @Bind(R.id.card_view)
+        CardView cardView;
 
         public MyViewHolder(View itemView) {
             super(itemView);

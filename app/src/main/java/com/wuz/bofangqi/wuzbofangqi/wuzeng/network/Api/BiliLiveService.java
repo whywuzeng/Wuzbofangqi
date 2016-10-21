@@ -2,6 +2,7 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.network.Api;
 
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.LiveIndex;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoDetail;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.hotTagsSearch;
 
 import okhttp3.ResponseBody;
@@ -9,6 +10,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -38,4 +40,9 @@ public interface BiliLiveService {
     Observable<SearchResult> getSearchResult(@Field("content") String content,
                                              @Field("page") int page,
                                              @Field("count") int count);
+
+    /*GET http://bilibili-service.daoapp.io/view/6647445 */
+    @GET("view/{aid}")
+        Observable<VideoDetail> getVideoDetail(@Path("aid") int aid);
+
 }

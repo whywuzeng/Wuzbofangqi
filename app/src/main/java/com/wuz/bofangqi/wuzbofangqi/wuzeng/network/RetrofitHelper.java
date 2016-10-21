@@ -3,6 +3,7 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.network;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.App.OhMyWuzZhibo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoDetail;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.hotTagsSearch;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.network.Api.BiliLiveService;
 
@@ -92,6 +93,19 @@ public class RetrofitHelper {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
         return searchResultObservable;
+    }
+
+    public static Observable<VideoDetail> getVideoDetail(int sid)
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_SEARCH_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<VideoDetail> videoDetailObservable = build.create(BiliLiveService.class).getVideoDetail(sid)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+        return videoDetailObservable;
     }
 
     private static void initOkHttpClient() {
