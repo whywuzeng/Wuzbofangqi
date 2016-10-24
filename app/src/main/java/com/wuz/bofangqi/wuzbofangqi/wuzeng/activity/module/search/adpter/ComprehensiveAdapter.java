@@ -85,7 +85,7 @@ public class ComprehensiveAdapter extends RecyclerView.Adapter<ComprehensiveAdap
         return mvideo1.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+     class MyViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.img_over_bigpic)
         ImageView imgOverBigpic;

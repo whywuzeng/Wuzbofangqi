@@ -3,6 +3,7 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.network;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.App.OhMyWuzZhibo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoComment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoDetail;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.hotTagsSearch;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.network.Api.BiliLiveService;
@@ -35,6 +36,8 @@ import rx.schedulers.Schedulers;
 public class RetrofitHelper {
 
     private static OkHttpClient mOkHttpClient;
+
+    public static final String BASE_API_URL="http://api.bilibili.cn/";
 
     public static final String BASE_SEARCH_URL="http://bilibili-service.daoapp.io/";
 
@@ -106,6 +109,27 @@ public class RetrofitHelper {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
         return videoDetailObservable;
+    }
+
+    /**
+     * @Query("aid") int aid,
+     @Query("page") int page,
+     @Query("pagesize") int pagesize,
+     @Query("ver") int ver
+     );
+     * @return
+     */
+    public static Observable<VideoComment> getVideoComment(int aid,int page,int pagesize,int ver)
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<VideoComment> videoCommentObservable = build.create(BiliLiveService.class).getVideoComment(aid, page, pagesize, ver)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+        return videoCommentObservable;
     }
 
     private static void initOkHttpClient() {

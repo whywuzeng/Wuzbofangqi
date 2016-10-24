@@ -2,6 +2,7 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.network.Api;
 
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.LiveIndex;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoComment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoDetail;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.hotTagsSearch;
 
@@ -44,5 +45,13 @@ public interface BiliLiveService {
     /*GET http://bilibili-service.daoapp.io/view/6647445 */
     @GET("view/{aid}")
         Observable<VideoDetail> getVideoDetail(@Path("aid") int aid);
+
+   /* http://api.bilibili.cn/feedback?aid=6647445&page=2&pagesize=20&ver=3*/
+    @GET("feedback")
+    Observable<VideoComment> getVideoComment(@Query("aid") int aid,
+                                             @Query("page") int page,
+                                             @Query("pagesize") int pagesize,
+                                             @Query("ver") int ver
+                                             );
 
 }

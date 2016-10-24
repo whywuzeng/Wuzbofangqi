@@ -10,16 +10,18 @@
 
     <com.wuz.bofangqi.wuzbofangqi.wuzeng.widget.CircleImageView
         android:id="@+id/user_avatar"
+        android:src="@drawable/ic_coin"
         android:layout_margin="4dp"
         android:layout_width="38dp"
         android:layout_height="38dp"/>
 
     <TextView
         android:id="@+id/user_name"
+        android:text="都是"
         android:minWidth="74dp"
         android:layout_marginEnd="4dp"
         android:gravity="center_horizontal"
-        android:layout_width="wrap_contentw"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>

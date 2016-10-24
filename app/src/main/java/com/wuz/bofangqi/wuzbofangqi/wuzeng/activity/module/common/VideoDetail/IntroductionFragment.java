@@ -1,8 +1,11 @@
 package com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.VideoDetail;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 
+import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxLazeFragment;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoDetail;
 
 /**
  * Created by Administrator on 2016-10-21.
@@ -13,18 +16,44 @@ import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxLazeFragment;
  * UpdateDate:
  */
 public class IntroductionFragment extends RxLazeFragment {
+    private static final String AID = "aid";
+    private static final String VIDEODETAIL = "videodetail";
+    private int mAid;
+    private Parcelable mVideodetail;
+
     @Override
     protected void OnViewCreateFinish(Bundle savedInstanceState) {
+        Bundle arguments = getArguments();
+        if (arguments!=null)
+        {
+            mAid = arguments.getInt(AID);
+            mVideodetail = arguments.getParcelable(VIDEODETAIL);
+        }
+        setVideoInfo();
+    }
+
+    private void setVideoInfo() {
 
     }
 
     @Override
     protected int getLayoutID() {
-        return 0;
+        return R.layout.fragment_introduction;
     }
 
     @Override
     protected void onlazyLoad() {
 
     }
+
+    public static IntroductionFragment newInstance(VideoDetail mVideoDetail,int aid) {
+        Bundle args = new Bundle();
+        args.putInt(AID,aid);
+        args.putParcelable(VIDEODETAIL,mVideoDetail);
+        IntroductionFragment fragment = new IntroductionFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
 }

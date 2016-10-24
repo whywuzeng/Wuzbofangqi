@@ -148,10 +148,17 @@ public class VideoDetailActivity extends RxAppBasecompatActivity {
         titles.add("评论"+"("+mVideoDetail.videoReview+")");
         //创建两个fragment
 
+        IntroductionFragment mIntroductionFragment = IntroductionFragment.newInstance(mVideoDetail, mIntExtra);
+        VideoCommentFragment videoCommentFragment = VideoCommentFragment.newInstance(mIntExtra);
 
-        new VideoDetailPageAdapter(titles,);
+        List<Fragment> fragments=new ArrayList<>();
+        fragments.add(mIntroductionFragment);
+        fragments.add(videoCommentFragment);
 
-        viewPager.setAdapter();
+        VideoDetailPageAdapter videoDetailPageAdapter = new VideoDetailPageAdapter(getSupportFragmentManager(), titles, fragments);
+
+        viewPager.setAdapter(videoDetailPageAdapter);
+        viewPager.setOffscreenPageLimit(2);
         tablayout.setViewPager(viewPager);
 
     }
