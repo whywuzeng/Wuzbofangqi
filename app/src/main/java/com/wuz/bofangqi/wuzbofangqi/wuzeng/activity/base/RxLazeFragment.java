@@ -3,6 +3,7 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
  */
 public abstract class RxLazeFragment extends RxFragment {
 
-    private View parentView;
+    protected View parentView;
 
     private Activity activity;
 
@@ -30,22 +31,30 @@ public abstract class RxLazeFragment extends RxFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-      parentView=  inflater.inflate(getLayoutID(),container,false);
-
-        ButterKnife.bind(this, parentView);
-        if (parentView.getParent()!=null)
-        {
-            ViewGroup parent =(ViewGroup) parentView.getParent();
-            parent.removeView(parentView);
+        if (parentView != null) {
+            ViewGroup parent = (ViewGroup) parentView.getParent();
+            if (parent != null) {
+                parent.removeView(parentView);
+            }
         }
+        try {
+            parentView=  inflater.inflate(getLayoutID(),container,false);
+        } catch (InflateException e) {
+
+        }
+//        isParentView();
         return parentView;
+    }
+
+    protected void isParentView() {
+
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
         OnViewCreateFinish(savedInstanceState);
-
 
     }
 

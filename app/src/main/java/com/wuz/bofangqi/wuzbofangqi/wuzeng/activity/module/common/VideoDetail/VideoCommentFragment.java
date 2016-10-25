@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.facebook.stetho.common.LogUtil;
 import com.wuz.bofangqi.wuzbofangqi.R;
@@ -14,10 +15,10 @@ import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.VideoDetail.ad
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoComment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.network.RetrofitHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Observer;
 
 /**
@@ -28,16 +29,19 @@ import rx.Observer;
  * UpdateUser:
  * UpdateDate:
  */
-public class VideoCommentFragment extends RxLazeFragment {
+public class VideoCommentFragment extends RxLazeFragment implements View.OnClickListener{
 
     private static final String AID = "aid";
-    @Bind(R.id.recyle)
+    @Bind(R.id.recyle_video_comment)
     RecyclerView recyle;
+    @Bind(R.id.btn_access_net)
+    Button btnAccessNet;
     private int mAnInt;
-    private int PageNum=1;
-    private int PageSize=20;
-    private List<VideoComment.ListBean> mListBean;
+    private int PageNum = 1;
+    private int PageSize = 20;
+    private List<VideoComment.ListBean> mListBean=new ArrayList<>();
     private VideoCommentAdapter mVideoCommentAdapter;
+    private View mLoadlayout;
 
     public static VideoCommentFragment newInstance(int aid) {
         Bundle args = new Bundle();
@@ -46,24 +50,37 @@ public class VideoCommentFragment extends RxLazeFragment {
         fragment.setArguments(args);
         return fragment;
     }
-    
-    
+
+    @Override
+    protected void isParentView() {
+        if (parentView.getParent()!=null)
+        {
+            ViewGroup parent =(ViewGroup) parentView.getParent();
+            parent.removeView(parentView);
+        }
+    }
+
     @Override
     protected void OnViewCreateFinish(Bundle savedInstanceState) {
+//        if (parentView.getParent()!=null)
+//        {
+//            ViewGroup parent =(ViewGroup) parentView.getParent();
+//            parent.removeView(parentView);
+//        }
         Bundle arguments = getArguments();
-        if (arguments!=null)
-        {
+        if (arguments != null) {
             mAnInt = arguments.getInt(AID);
         }
 
         initRecyclerView();
+        btnAccessNet.setOnClickListener(this);
         initVideoInfo();
 
     }
 
     private void initVideoInfo() {
-        int ver=3;
-        RetrofitHelper.getVideoComment(mAnInt,PageNum,PageSize,ver)
+        int ver = 3;
+        RetrofitHelper.getVideoComment(mAnInt, PageNum, PageSize, ver)
                 .compose(this.<VideoComment>bindToLifecycle())
                 .subscribe(new Observer<VideoComment>() {
                     @Override
@@ -79,18 +96,18 @@ public class VideoCommentFragment extends RxLazeFragment {
                     @Override
                     public void onNext(VideoComment videoComment) {
 
-                        mListBean = videoComment.list;
-                        finishTask();
+                        if (videoComment.list.size() > 0) {
+                            mListBean.addAll(videoComment.list);
+                            finishTask();
+                        }
                     }
                 });
 
     }
 
     private void finishTask() {
-        if (mListBean.size()>0)
-        {
-            if (mVideoCommentAdapter!=null)
-            {
+        if (mListBean.size() > 0) {
+            if (mVideoCommentAdapter != null) {
                 mVideoCommentAdapter.setAllData(mListBean);
             }
         }
@@ -100,7 +117,12 @@ public class VideoCommentFragment extends RxLazeFragment {
         recyle.setLayoutManager(new LinearLayoutManager(getActivity()));
         mVideoCommentAdapter = new VideoCommentAdapter(getActivity());
         recyle.setAdapter(mVideoCommentAdapter);
-        mVideoCommentAdapter.notifyDataSetChanged();
+        createLoadMoreView();
+    }
+
+    private void createLoadMoreView() {
+        mLoadlayout = LayoutInflater.from(getActivity()).inflate(R.layout.layout_load_more, recyle, false);
+//        mVideoCommentAdapter.
     }
 
     @Override
@@ -110,20 +132,16 @@ public class VideoCommentFragment extends RxLazeFragment {
 
     @Override
     protected void onlazyLoad() {
-        
+
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+    public void onClick(View v) {
+        if (v.getId()==R.id.btn_access_net)
+        {
+            PageNum++;
+            initVideoInfo();
+        }
     }
 }

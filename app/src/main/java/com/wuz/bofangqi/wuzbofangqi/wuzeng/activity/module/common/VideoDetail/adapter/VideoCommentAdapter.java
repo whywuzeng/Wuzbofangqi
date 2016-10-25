@@ -35,23 +35,23 @@ public class VideoCommentAdapter extends RecyclerView.Adapter<VideoCommentAdapte
         this.mContext = mContext;
     }
 
-    public void setAllData(List<VideoComment.ListBean> mListBeans) {
+    public void setAllData(List<VideoComment.ListBean> ListBeans) {
         this.mListBeans.clear();
-        this.mListBeans.addAll(mListBeans);
+        this.mListBeans.addAll(ListBeans);
         notifyDataSetChanged();
     }
 
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public VideoCommentAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.video_comment_item, parent);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.video_comment_item, parent,false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(VideoCommentAdapter.MyViewHolder holder, int position) {
 //        holder.imgUserAvatar
         Glide.with(mContext).load( mListBeans.get(position).face)
                 .into(holder.imgUserAvatar);

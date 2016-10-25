@@ -2,6 +2,7 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.VideoDetail;
 
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.ViewGroup;
 
 import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxLazeFragment;
@@ -23,6 +24,11 @@ public class IntroductionFragment extends RxLazeFragment {
 
     @Override
     protected void OnViewCreateFinish(Bundle savedInstanceState) {
+//        if (parentView.getParent()!=null)
+//        {
+//            ViewGroup parent =(ViewGroup) parentView.getParent();
+//            parent.removeView(parentView);
+//        }
         Bundle arguments = getArguments();
         if (arguments!=null)
         {
@@ -34,6 +40,15 @@ public class IntroductionFragment extends RxLazeFragment {
 
     private void setVideoInfo() {
 
+    }
+
+    @Override
+    protected void isParentView() {
+        if (parentView.getParent()!=null)
+        {
+            ViewGroup parent =(ViewGroup) parentView.getParent();
+            parent.removeView(parentView);
+        }
     }
 
     @Override

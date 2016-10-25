@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Observer;
 
 /**
@@ -59,9 +58,9 @@ public class VideoDetailActivity extends RxAppBasecompatActivity {
     CollapsingToolbarLayout collToolbarlayout;
     @Bind(R.id.tablayout)
     SlidingTabLayout tablayout;
-    @Bind(R.id.view_pager)
+    @Bind(R.id.view_pager_detail)
     ViewPager viewPager;
-    @Bind(R.id.app_bar_layout)
+    @Bind(R.id.app_bar_layout_detail)
     AppBarLayout appBarLayout;
     @Bind(R.id.coordlayout_mian_content)
     CoordinatorLayout coordlayoutMianContent;
@@ -158,7 +157,6 @@ public class VideoDetailActivity extends RxAppBasecompatActivity {
         VideoDetailPageAdapter videoDetailPageAdapter = new VideoDetailPageAdapter(getSupportFragmentManager(), titles, fragments);
 
         viewPager.setAdapter(videoDetailPageAdapter);
-        viewPager.setOffscreenPageLimit(2);
         tablayout.setViewPager(viewPager);
 
     }
@@ -213,12 +211,6 @@ public class VideoDetailActivity extends RxAppBasecompatActivity {
         activity.startActivity(mIntent);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     public class VideoDetailPageAdapter extends FragmentPagerAdapter
     {

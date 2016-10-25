@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <android.support.v7.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/recyle"
+    android:id="@+id/recyle_video_comment"
     android:clipToPadding="false"
     android:overScrollMode="never"
     android:paddingTop="16dp"
     android:scrollbars="none"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
 
 </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/btn_access_net"
+        android:text="再次访问"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
