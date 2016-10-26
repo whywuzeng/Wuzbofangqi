@@ -10,6 +10,8 @@ import android.widget.Button;
 
 import com.facebook.stetho.common.LogUtil;
 import com.wuz.bofangqi.wuzbofangqi.R;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.adapter.helper.EndlessRecyclerOnScrollListener;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.adapter.helper.HeaderViewRecyclerAdapter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxLazeFragment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.VideoDetail.adapter.VideoCommentAdapter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoComment;
@@ -42,6 +44,7 @@ public class VideoCommentFragment extends RxLazeFragment implements View.OnClick
     private List<VideoComment.ListBean> mListBean=new ArrayList<>();
     private VideoCommentAdapter mVideoCommentAdapter;
     private View mLoadlayout;
+    private HeaderViewRecyclerAdapter headerCommentViewRecyclerAdapter;
 
     public static VideoCommentFragment newInstance(int aid) {
         Bundle args = new Bundle();
@@ -90,6 +93,7 @@ public class VideoCommentFragment extends RxLazeFragment implements View.OnClick
 
                     @Override
                     public void onError(Throwable e) {
+
                         LogUtil.i("onError" + e.getLocalizedMessage());
                     }
 
@@ -109,20 +113,32 @@ public class VideoCommentFragment extends RxLazeFragment implements View.OnClick
         if (mListBean.size() > 0) {
             if (mVideoCommentAdapter != null) {
                 mVideoCommentAdapter.setAllData(mListBean);
+                mLoadlayout.setVisibility(View.GONE);
             }
         }
     }
 
     private void initRecyclerView() {
-        recyle.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mVideoCommentAdapter = new VideoCommentAdapter(getActivity());
-        recyle.setAdapter(mVideoCommentAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyle.setLayoutManager(linearLayoutManager);
+        mVideoCommentAdapter = new VideoCommentAdapter(getActivity(),recyle);
+        mVideoCommentAdapter.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
+            @Override
+            protected void onLoadMore(int currentPage) {
+                PageNum++;
+                initVideoInfo();
+                mLoadlayout.setVisibility(View.VISIBLE);
+            }
+        });
+        headerCommentViewRecyclerAdapter = new HeaderViewRecyclerAdapter(mVideoCommentAdapter);
+        recyle.setAdapter(headerCommentViewRecyclerAdapter);
         createLoadMoreView();
     }
 
     private void createLoadMoreView() {
         mLoadlayout = LayoutInflater.from(getActivity()).inflate(R.layout.layout_load_more, recyle, false);
-//        mVideoCommentAdapter.
+        headerCommentViewRecyclerAdapter.addFooterView(mLoadlayout);
+
     }
 
     @Override

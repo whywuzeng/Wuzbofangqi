@@ -10,13 +10,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.wuz.bofangqi.wuzbofangqi.R;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.adapter.helper.AbsRecyclerViewAdapter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoComment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016-10-24.
@@ -26,12 +26,13 @@ import butterknife.ButterKnife;
  * UpdateUser:
  * UpdateDate:
  */
-public class VideoCommentAdapter extends RecyclerView.Adapter<VideoCommentAdapter.MyViewHolder> {
+public class VideoCommentAdapter extends AbsRecyclerViewAdapter {
 
     private Context mContext;
     private List<VideoComment.ListBean> mListBeans = new ArrayList<>();
 
-    public VideoCommentAdapter(Context mContext) {
+    public VideoCommentAdapter(Context mContext,RecyclerView mRecyclerView) {
+        super(mRecyclerView);
         this.mContext = mContext;
     }
 
@@ -43,26 +44,31 @@ public class VideoCommentAdapter extends RecyclerView.Adapter<VideoCommentAdapte
 
 
     @Override
-    public VideoCommentAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public VideoCommentAdapter.MyCLickViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(mContext).inflate(R.layout.video_comment_item, parent,false);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
+        MyCLickViewHolder myViewHolder = new MyCLickViewHolder(view);
         return myViewHolder;
     }
 
-    @Override
-    public void onBindViewHolder(VideoCommentAdapter.MyViewHolder holder, int position) {
-//        holder.imgUserAvatar
-        Glide.with(mContext).load( mListBeans.get(position).face)
-                .into(holder.imgUserAvatar);
-        initCurrentLevel(mListBeans.get(position).levelInfo.currentLevel, holder.itemUserLevel);
-        holder.tvName.setText(mListBeans.get(position).nick);
-        holder.tvShi.setText(mListBeans.get(position).good + "");
-        holder.tvUpNum.setText(mListBeans.get(position).replyCount+"");
-        holder.tvFloorNum.setText(mListBeans.get(position).lv+"");
-        holder.tvTime.setText(mListBeans.get(position).createAt);
-        holder.tvComment.setText(mListBeans.get(position).msg);
 
+    @Override
+    public void onBindViewHolder(ClickableViewHolder holder , int position) {
+//        holder.imgUserAvatar
+        if (holder instanceof MyCLickViewHolder) {
+            MyCLickViewHolder  mholder= (MyCLickViewHolder)holder;
+            Glide.with(mContext).load(mListBeans.get(position).face)
+                    .into(mholder.imgUserAvatar);
+            initCurrentLevel(mListBeans.get(position).levelInfo.currentLevel, mholder.itemUserLevel);
+            mholder.tvName.setText(mListBeans.get(position).nick);
+            mholder.tvShi.setText(mListBeans.get(position).good + "");
+            mholder.tvUpNum.setText(mListBeans.get(position).replyCount + "");
+            mholder.tvFloorNum.setText(mListBeans.get(position).lv + "");
+            mholder.tvTime.setText(mListBeans.get(position).createAt);
+            mholder.tvComment.setText(mListBeans.get(position).msg);
+        }
+
+        super.onBindViewHolder(holder, position);
     }
 
     private void initCurrentLevel(int currentLevel, ImageView itemUserLevel) {
@@ -93,7 +99,7 @@ public class VideoCommentAdapter extends RecyclerView.Adapter<VideoCommentAdapte
         return mListBeans.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyCLickViewHolder extends AbsRecyclerViewAdapter.ClickableViewHolder {
 
         @Bind(R.id.img_user_avatar)
         ImageView imgUserAvatar;
@@ -112,9 +118,16 @@ public class VideoCommentAdapter extends RecyclerView.Adapter<VideoCommentAdapte
         @Bind(R.id.tv_comment)
         TextView tvComment;
 
-        public MyViewHolder(View itemView) {
+        public MyCLickViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            imgUserAvatar=$(R.id.img_user_avatar);
+            itemUserLevel=$(R.id.item_user_level);
+            tvName=$(R.id.tv_name);
+            tvShi=$(R.id.tv_shi);
+            tvUpNum=$(R.id.tv_up_num);
+            tvFloorNum=$(R.id.tv_floor_num);
+            tvTime=$(R.id.tv_time);
+            tvComment=$(R.id.tv_comment);
         }
     }
 

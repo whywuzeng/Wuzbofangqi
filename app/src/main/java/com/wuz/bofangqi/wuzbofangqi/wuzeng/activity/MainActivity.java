@@ -3,6 +3,7 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.activity;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -31,6 +32,12 @@ public class MainActivity extends RxAppBasecompatActivity implements NavigationV
     private DrawerLayout drawerlayout;
     private int index;
     private int CurrentTabIndex=0;
+    private FragmentManager mFragmentManager;
+
+    private  fragment1 fragment1;
+    private  homeFragment homeFragment;
+
+    public static final String FRG_TAG[] ={"fragment1","homeFragment"};
 
     @Override
     public int getLayoutId() {
@@ -39,14 +46,26 @@ public class MainActivity extends RxAppBasecompatActivity implements NavigationV
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+
+        mFragmentManager = getSupportFragmentManager();
+        if (savedInstanceState!=null)
+        {
+            fragment1=(com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.fragment1)mFragmentManager.findFragmentByTag(FRG_TAG[0]);
+            homeFragment= (com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.homeFragment)mFragmentManager.findFragmentByTag(FRG_TAG[1]);
+            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+            fragmentTransaction.hide(homeFragment).commit();
+        }
+
         //初始化Fragment
         initFragments();
         //初始化侧滑菜单
         initNavigationView();
+
     }
 
     private void initNavigationView() {
         navigation_view=(NavigationView)findViewById(R.id.navigation_view);
+//        navigation_view=(NavigationView)findViewById(R.id.navigation_view);
         drawerlayout=(DrawerLayout)findViewById(R.id.drawerlayout);
 
         navigation_view.setNavigationItemSelectedListener(this);
@@ -62,8 +81,9 @@ public class MainActivity extends RxAppBasecompatActivity implements NavigationV
     }
 
     private void initFragments() {
-        fragment1 fragment1 = com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.fragment1.newInstance(1 + "");
-        homeFragment homeFragment = com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.homeFragment.newInstance();
+         fragment1 = com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.fragment1.newInstance(1 + "");
+         homeFragment = com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.homeFragment.newInstance();
+
         fragment1 fragment3 = com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.fragment1.newInstance(3 + "");
         fragment1 fragment4 = com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.fragment1.newInstance(4 + "");
 
@@ -117,7 +137,7 @@ public class MainActivity extends RxAppBasecompatActivity implements NavigationV
         ft.hide(fragments[CurrentTabIndex]);
         if (!fragments[index].isAdded())
         {
-            ft.add(R.id.contain_rl,fragments[index]);
+            ft.add(R.id.contain_rl,fragments[index],FRG_TAG[index]);
         }
         ft.show(fragments[index]).commit();
         CurrentTabIndex=index;

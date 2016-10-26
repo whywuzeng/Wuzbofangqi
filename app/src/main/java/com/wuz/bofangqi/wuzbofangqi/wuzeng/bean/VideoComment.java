@@ -17,8 +17,6 @@ public class VideoComment {
 
     @SerializedName("results")
     public int results;
-    @SerializedName("page")
-    public int page;
     @SerializedName("pages")
     public int pages;
     @SerializedName("isAdmin")
@@ -73,8 +71,9 @@ public class VideoComment {
             public int currentLevel;
             @SerializedName("current_min")
             public int currentMin;
-            @SerializedName("next_exp")
-            public int nextExp;
+            //这有可能为空 真郁闷
+//            @SerializedName("next_exp")
+//            public int nextExp;
         }
     }
 
