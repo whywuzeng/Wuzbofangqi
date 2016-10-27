@@ -3,8 +3,11 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.network;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.App.OhMyWuzZhibo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonBangumiSerial;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonNewBangumi;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoComment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoDetail;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.bangumiBannerAndRecy;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.hotTagsSearch;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.network.Api.BiliLiveService;
 
@@ -36,6 +39,8 @@ import rx.schedulers.Schedulers;
 public class RetrofitHelper {
 
     private static OkHttpClient mOkHttpClient;
+
+    public static final String BASE_APP_BILI="http://app.bilibili.com/";
 
     public static final String BASE_API_URL="http://api.bilibili.cn/";
 
@@ -131,6 +136,45 @@ public class RetrofitHelper {
                 .subscribeOn(Schedulers.io());
         return videoCommentObservable;
     }
+
+    public static Observable<bangumiBannerAndRecy> getBangumiBannerAndRecy()
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_SEARCH_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<bangumiBannerAndRecy> bangumiBannerAndRecy = build.create(BiliLiveService.class).getBangumiBannerAndRecy()
+                .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io());
+        return bangumiBannerAndRecy;
+    }
+
+    public static Observable<SeasonNewBangumi> getSeasonNewBangumi()
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_APP_BILI)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<SeasonNewBangumi> seasonNewBangumiObservable = build.create(BiliLiveService.class).getSeasonNewBangumi()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+        return  seasonNewBangumiObservable;
+    }
+
+    public static Observable<SeasonBangumiSerial> getSeasonBangumiSerial()
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_SEARCH_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<SeasonBangumiSerial> seasonBangumiSerialObservable = build.create(BiliLiveService.class).getSeasonBangumiSerial()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+        return seasonBangumiSerialObservable;
+    }
+
 
     private static void initOkHttpClient() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();

@@ -101,6 +101,8 @@ public class VideoCommentFragment extends RxLazeFragment implements View.OnClick
                     public void onNext(VideoComment videoComment) {
 
                         if (videoComment.list.size() > 0) {
+                            //这里测试一下
+//                            mListBean.clear();
                             mListBean.addAll(videoComment.list);
                             finishTask();
                         }
@@ -150,7 +152,6 @@ public class VideoCommentFragment extends RxLazeFragment implements View.OnClick
     protected void onlazyLoad() {
 
     }
-
 
     @Override
     public void onClick(View v) {

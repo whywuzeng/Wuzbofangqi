@@ -2,8 +2,11 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.network.Api;
 
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.LiveIndex;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonBangumiSerial;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonNewBangumi;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoComment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.VideoDetail;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.bangumiBannerAndRecy;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.hotTagsSearch;
 
 import okhttp3.ResponseBody;
@@ -54,4 +57,15 @@ public interface BiliLiveService {
                                              @Query("ver") int ver
                                              );
 
+    /*http://bilibili-service.daoapp.io/bangumiindex */
+    @GET("bangumiindex")
+    Observable<bangumiBannerAndRecy> getBangumiBannerAndRecy();
+
+    /*http://app.bilibili.com/bangumi/operation_module?_device=android&_hwid=ac538400c68784bb&_ulv=10000&module=bangumi&platform=android&screen=xxhdpi*/
+    @GET("bangumi/operation_module?_device=android&_hwid=ac538400c68784bb&_ulv=10000&module=bangumi&platform=android&screen=xxhdpi")
+    Observable<SeasonNewBangumi> getSeasonNewBangumi();
+
+    /*http://bilibili-service.daoapp.io/bangumi*/
+    @GET("bangumi")
+    Observable<SeasonBangumiSerial> getSeasonBangumiSerial();
 }

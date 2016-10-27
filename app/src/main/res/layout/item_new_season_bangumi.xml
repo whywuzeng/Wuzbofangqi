@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+   >
+<android.support.v7.widget.CardView
+    android:id="@+id/season_card_view"
+    android:layout_width="match_parent"
+    app:cardBackgroundColor="@color/window_background"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_season_center"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+    <TextView
+        android:id="@+id/tv_season_banguminum"
+        android:layout_gravity="bottom"
+        android:textColor="@color/font_normal"
+        android:textSize="16sp"
+        android:text="200万正在追番"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_season_title"
+        android:padding="3dp"
+        android:layout_margin="5dp"
+        android:textColor="@android:color/background_dark"
+        android:text="标题的标题的标题的标题的"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

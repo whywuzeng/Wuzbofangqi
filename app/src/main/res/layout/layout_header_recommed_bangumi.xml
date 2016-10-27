@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/head_season_list"
+        android:layout_width="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/bangumi_home_ic_season_2"
+                android:layout_margin="3dp"
+                android:padding="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@color/font_normal"
+                android:text="4月新番"
+                android:layout_margin="3dp"
+                android:padding="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <TextView
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:layout_alignParentEnd="true"
+            android:drawableEnd="@drawable/ic_gray_arrow_right"
+            android:textSize="10sp"
+            android:textColor="@color/font_normal"
+            android:text="分季列表"
+            android:padding="3dp"
+            android:layout_margin="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_tuijian"
+                android:layout_margin="3dp"
+                android:padding="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@color/font_normal"
+                android:text="番剧推荐"
+                android:layout_margin="3dp"
+                android:padding="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <TextView
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:layout_alignParentEnd="true"
+            android:drawableEnd="@drawable/ic_gray_arrow_right"
+            android:textSize="10sp"
+            android:textColor="@color/font_normal"
+            android:text="推荐列表"
+            android:padding="3dp"
+            android:layout_margin="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -30,4 +30,9 @@
 
     <color name="gray_20">#B3B3B3</color>
 
+    <color name="yellow_30">#FEA501</color>
+
+    <color name="pink_30">#FD7071</color>
+    <color name="blue_30">#20C1FD</color>
+
 </resources>

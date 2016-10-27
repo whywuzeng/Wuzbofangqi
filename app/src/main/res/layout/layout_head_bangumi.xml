@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"
+            android:gravity="center"
+            android:background="@drawable/layout_head_bangumi_tv_bg"
+            android:drawableStart="@drawable/ic_following_bangumi"
+            android:text="追番"
+            android:drawablePadding="5dp"
+            android:textColor="@color/window_background"
+            android:textSize="15sp"
+             android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:padding="5dp"
+            android:gravity="center"
+            android:background="@drawable/bg_bule_30"
+            android:drawableStart="@drawable/ic_bangumi_calendar_7"
+            android:text="放送表"
+            android:drawablePadding="5dp"
+            android:textColor="@color/window_background"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:id="@+id/tv_bangumi_index"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:padding="8dp"
+            android:gravity="center"
+            android:background="@drawable/bg_pink_30"
+            android:drawableStart="@drawable/ic_bangumi_category"
+            android:text="索引"
+            android:drawablePadding="5dp"
+            android:textColor="@color/window_background"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_category_t33"
+                android:layout_margin="5dp"
+                android:padding="2dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"/>
+
+            <TextView
+                android:text="新番连载"
+                android:textColor="@android:color/background_dark"
+                android:textSize="12sp"
+                android:padding="2dp"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_bangumi_more"
+            android:layout_alignParentEnd="true"
+            android:padding="3dp"
+            android:layout_margin="5dp"
+            android:drawablePadding="5dp"
+            android:drawableEnd="@drawable/ic_gray_arrow_right"
+            android:text="更多连载"
+            android:textSize="11sp"
+            android:textColor="@color/font_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</LinearLayout>

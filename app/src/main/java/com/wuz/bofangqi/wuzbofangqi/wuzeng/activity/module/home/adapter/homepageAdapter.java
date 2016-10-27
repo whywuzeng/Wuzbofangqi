@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.HomeLiveFragment;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.bangumi.BangumiFragment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.discover.HomeDiscoverFragment;
 
 /**
@@ -42,6 +43,8 @@ public class homepageAdapter extends FragmentPagerAdapter {
                     break;
                 case  1:
                     fragments[position]= HomeDiscoverFragment.newInstance();
+                case 2:
+                    fragments[position]= BangumiFragment.newInstance();
             }
         }
         return fragments[position];
