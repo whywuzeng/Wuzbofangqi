@@ -16,6 +16,8 @@ import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.adapter.helper.AbsRecyclerVi
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.adapter.helper.HeaderViewRecyclerAdapter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxLazeFragment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.adapter.BangumiRecommedAdapter;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.adapter.DoubleMoreRecyAdapter;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.adapter.SeasonNewBangumiAdapter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonBangumiSerial;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonNewBangumi;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.bangumiBannerAndRecy;
@@ -203,21 +205,39 @@ public class BangumiFragment extends RxLazeFragment {
         mtv_bangumi_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //有6个item的更多连载
+                SeasonBangumiActivity.laucher(getActivity(), (ArrayList<SeasonNewBangumi.ListBean>) listBeanList);
             }
         });
 
         mHeaderViewRecyclerAdapter.addHeaderView(mlayout_Header_bangumi);
 
-
             //设置分季新番
         RecyclerView recy_season_list = (RecyclerView) mlayout_head_recommed_bangumi.findViewById(R.id.head_season_list);
-        recy_season_list.setHasFixedSize(false);
+        recy_season_list.setHasFixedSize(true);
         recy_season_list.setNestedScrollingEnabled(false);
-        recy_season_list.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        recy_season_list.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        final SeasonNewBangumiAdapter bangumiAdapter = new SeasonNewBangumiAdapter(recy_season_list, getActivity());
+        recy_season_list.setAdapter(bangumiAdapter);
 
 
+//        设置连载
+        RecyclerView mrecy_double_more = (RecyclerView) mlayout_head_recommed_bangumi.findViewById(R.id.recy_more_double);
+        mrecy_double_more.setNestedScrollingEnabled(false);
+        mrecy_double_more.setHasFixedSize(true);
+        mrecy_double_more.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        final DoubleMoreRecyAdapter doubleMoreRecyAdapter = new DoubleMoreRecyAdapter(mrecy_double_more, getActivity());
+        mrecy_double_more.setAdapter(doubleMoreRecyAdapter);
 
+        mrecy_double_more.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bangumiAdapter.SetAllData(listBeanList);
+                doubleMoreRecyAdapter.SetAllData(mListSeriallist);
+            }
+        }, 250);
+
+        mHeaderViewRecyclerAdapter.addHeaderView(mlayout_head_recommed_bangumi);
     }
 
     @Override

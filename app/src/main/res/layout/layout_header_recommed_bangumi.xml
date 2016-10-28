@@ -5,7 +5,7 @@
               android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/head_season_list"
+        android:id="@+id/recy_more_double"
         android:layout_width="match_parent"
         android:overScrollMode="never"
         android:scrollbars="none"
@@ -54,6 +54,7 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/head_season_list"
         android:layout_width="match_parent"
         android:overScrollMode="never"
         android:scrollbars="none"

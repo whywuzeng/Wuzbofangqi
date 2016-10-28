@@ -41,10 +41,12 @@ public class homepageAdapter extends FragmentPagerAdapter {
                 case 0:
                     fragments[position]= HomeLiveFragment.newInstance();
                     break;
-                case  1:
-                    fragments[position]= HomeDiscoverFragment.newInstance();
-                case 2:
+                case 1:
                     fragments[position]= BangumiFragment.newInstance();
+                    break;
+                case 2:
+                    fragments[position]= HomeDiscoverFragment.newInstance();
+                    break;
             }
         }
         return fragments[position];
