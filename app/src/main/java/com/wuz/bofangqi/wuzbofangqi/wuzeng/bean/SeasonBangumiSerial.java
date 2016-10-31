@@ -1,7 +1,11 @@
 package com.wuz.bofangqi.wuzbofangqi.wuzeng.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +16,7 @@ import java.util.List;
  * UpdateUser:
  * UpdateDate:
  */
-public class SeasonBangumiSerial {
+public class SeasonBangumiSerial implements Parcelable {
 
 
     @SerializedName("count")
@@ -42,7 +46,8 @@ public class SeasonBangumiSerial {
     @SerializedName("list")
     public List<ListBean> list;
 
-    public static class ListBean {
+    public static class ListBean implements Parcelable {
+
         @SerializedName("title")
         public String title;
         @SerializedName("area")
@@ -81,5 +86,102 @@ public class SeasonBangumiSerial {
         public int viewRank;
         @SerializedName("weekday")
         public int weekday;
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.title);
+            dest.writeString(this.area);
+            dest.writeInt(this.arealimit);
+            dest.writeInt(this.attention);
+            dest.writeInt(this.bangumiId);
+            dest.writeString(this.bgmcount);
+            dest.writeString(this.cover);
+            dest.writeString(this.squareCover);
+            dest.writeInt(this.danmakuCount);
+            dest.writeInt(this.favorites);
+            dest.writeInt(this.isFinish);
+            dest.writeString(this.lastupdateAt);
+            dest.writeByte(this.newX ? (byte) 1 : (byte) 0);
+            dest.writeInt(this.playCount);
+            dest.writeInt(this.seasonId);
+            dest.writeInt(this.spid);
+            dest.writeString(this.url);
+            dest.writeInt(this.viewRank);
+            dest.writeInt(this.weekday);
+        }
+
+        public ListBean() {
+        }
+
+        protected ListBean(Parcel in) {
+            this.title = in.readString();
+            this.area = in.readString();
+            this.arealimit = in.readInt();
+            this.attention = in.readInt();
+            this.bangumiId = in.readInt();
+            this.bgmcount = in.readString();
+            this.cover = in.readString();
+            this.squareCover = in.readString();
+            this.danmakuCount = in.readInt();
+            this.favorites = in.readInt();
+            this.isFinish = in.readInt();
+            this.lastupdateAt = in.readString();
+            this.newX = in.readByte() != 0;
+            this.playCount = in.readInt();
+            this.seasonId = in.readInt();
+            this.spid = in.readInt();
+            this.url = in.readString();
+            this.viewRank = in.readInt();
+            this.weekday = in.readInt();
+        }
+
+        public static final Creator<ListBean> CREATOR = new Creator<ListBean>() {
+            @Override
+            public ListBean createFromParcel(Parcel source) {
+                return new ListBean(source);
+            }
+
+            @Override
+            public ListBean[] newArray(int size) {
+                return new ListBean[size];
+            }
+        };
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.count);
+        dest.writeList(this.list);
+    }
+
+    public SeasonBangumiSerial() {
+    }
+
+    protected SeasonBangumiSerial(Parcel in) {
+        this.count = in.readString();
+        this.list = new ArrayList<ListBean>();
+        in.readList(this.list, ListBean.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<SeasonBangumiSerial> CREATOR = new Parcelable.Creator<SeasonBangumiSerial>() {
+        @Override
+        public SeasonBangumiSerial createFromParcel(Parcel source) {
+            return new SeasonBangumiSerial(source);
+        }
+
+        @Override
+        public SeasonBangumiSerial[] newArray(int size) {
+            return new SeasonBangumiSerial[size];
+        }
+    };
 }

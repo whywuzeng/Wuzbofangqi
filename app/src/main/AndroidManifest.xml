@@ -35,6 +35,8 @@
         <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.VideoDetail.VideoDetailActivity"/>
 
         <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.bangumi.SeasonBangumiActivity"/>
+
+        <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.BangumiDetailActivity"/>
     </application>
 
 </manifest>

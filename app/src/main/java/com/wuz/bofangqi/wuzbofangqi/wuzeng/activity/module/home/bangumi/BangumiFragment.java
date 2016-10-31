@@ -15,6 +15,7 @@ import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.adapter.helper.AbsRecyclerViewAdapter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.adapter.helper.HeaderViewRecyclerAdapter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxLazeFragment;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.BangumiDetailActivity;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.adapter.BangumiRecommedAdapter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.adapter.DoubleMoreRecyAdapter;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.adapter.SeasonNewBangumiAdapter;
@@ -228,6 +229,13 @@ public class BangumiFragment extends RxLazeFragment {
         mrecy_double_more.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         final DoubleMoreRecyAdapter doubleMoreRecyAdapter = new DoubleMoreRecyAdapter(mrecy_double_more, getActivity());
         mrecy_double_more.setAdapter(doubleMoreRecyAdapter);
+
+        doubleMoreRecyAdapter.setmOnItemClickListener(new AbsRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int postion, AbsRecyclerViewAdapter.ClickableViewHolder holder) {
+                BangumiDetailActivity.launcher(getActivity(),mListSeriallist.get(postion));
+            }
+        });
 
         mrecy_double_more.postDelayed(new Runnable() {
             @Override

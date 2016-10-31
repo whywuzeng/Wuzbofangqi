@@ -17,16 +17,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.1'
-
     //tabLayout
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
-
     //哪些包裹的布局 很多常用的布局的库
     compile 'com.android.support:design:24.2.0'
     //butterknife
@@ -34,42 +36,31 @@ dependencies {
     //Rxjava
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.0'
-
     //Gson
     compile 'com.google.code.gson:gson:2.6.2'
-
     compile 'com.android.support:cardview-v7:24.2.0'
-
     //RxLifecycle
     compile 'com.trello:rxlifecycle-components:0.6.1'
-
     //facebook 调试工具
     // 调试工具 调试网络的
     compile 'com.facebook.stetho:stetho:1.3.1'
     compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
-
     //searchBar
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
-
     //主题切换
     compile 'com.bilibili:magicasakura:0.1.1@aar'
-
     //Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
     //ijkplayer播放器
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.1'
-
     //Okhttp3
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
-
     //标签布局
     compile 'com.zhy:flowlayout-lib:1.0.1'
-
     //Retrofit2
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'

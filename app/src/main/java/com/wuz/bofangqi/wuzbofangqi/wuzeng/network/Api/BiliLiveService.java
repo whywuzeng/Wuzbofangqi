@@ -68,4 +68,8 @@ public interface BiliLiveService {
     /*http://bilibili-service.daoapp.io/bangumi*/
     @GET("bangumi")
     Observable<SeasonBangumiSerial> getSeasonBangumiSerial();
+
+    /*GET http://api.bilibili.cn/sp?spid=0&title=%E9%9D%92%E9%AC%BC*/
+//    @GET("sp")
+//    Observable<>
 }
