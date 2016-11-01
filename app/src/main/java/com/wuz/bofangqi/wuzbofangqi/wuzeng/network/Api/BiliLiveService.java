@@ -1,5 +1,6 @@
 package com.wuz.bofangqi.wuzbofangqi.wuzeng.network.Api;
 
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.BangumiDetailRecommend;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.LiveIndex;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonBangumiSerial;
@@ -72,4 +73,10 @@ public interface BiliLiveService {
     /*GET http://api.bilibili.cn/sp?spid=0&title=%E9%9D%92%E9%AC%BC*/
 //    @GET("sp")
 //    Observable<>
+
+   /* http://bangumi.bilibili.com/api/bangumi_recommend?access_key=f5bd4e793b82fba5aaf5b91fb549910a&actionKey=appkey&appkey=27eb53fc9058f8c3&build=3470&cursor=0&device=phone&mobi_app=iphone&pagesize=10&platform=ios&sign=56329a5709c401d4d7c0237f64f7943f&ts=1469613558 */
+// bangumi detail recommend
+    @GET("api/bangumi_recommend?access_key=f5bd4e793b82fba5aaf5b91fb549910a&actionKey=appkey&appkey=27eb53fc9058f8c3&build=3470&cursor=0&device=phone&mobi_app=iphone&pagesize=10&platform=ios&sign=56329a5709c401d4d7c0237f64f7943f&ts=1469613558")
+    Observable<BangumiDetailRecommend> getBangumiDetailRecommend();
+
 }

@@ -65,4 +65,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+
+    //Glide辅助库 图片模糊的
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
 }

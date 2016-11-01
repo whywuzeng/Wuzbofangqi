@@ -2,6 +2,7 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.network;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.App.OhMyWuzZhibo;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.BangumiDetailRecommend;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonBangumiSerial;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonNewBangumi;
@@ -49,6 +50,8 @@ public class RetrofitHelper {
     private static final String LIVE_BASE_URL = "http://live.bilibili.com/";
 
     public static final String HOT_SEARCH="http://s.search.bilibili.com/";
+
+    public static final String BANGUMI_API="http://bangumi.bilibili.com/";
 
     public static final String USERAGENT="Ohjiushigan Android Client/2.1 (jiushiqiangone@sina.com)";
 
@@ -173,6 +176,20 @@ public class RetrofitHelper {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
         return seasonBangumiSerialObservable;
+    }
+
+    public static Observable<BangumiDetailRecommend> getBangumiDetailRecommend()
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BANGUMI_API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<BangumiDetailRecommend> bangumiDetailRecommendObservable = build.create(BiliLiveService.class).getBangumiDetailRecommend()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+        return bangumiDetailRecommendObservable;
+
     }
 
 
