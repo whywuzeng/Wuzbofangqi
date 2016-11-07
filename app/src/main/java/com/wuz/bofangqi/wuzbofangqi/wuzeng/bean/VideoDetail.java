@@ -48,6 +48,81 @@ public class VideoDetail implements Parcelable {
     @com.google.gson.annotations.SerializedName("coins")
     public String coins;
 
+    @com.google.gson.annotations.SerializedName("list")
+    public listbean list;
+    public static class listbean implements Parcelable {
+
+        @com.google.gson.annotations.SerializedName("0")
+        public VideoAdditional videoAdditional;
+
+        public static class VideoAdditional implements Parcelable {
+
+            @com.google.gson.annotations.SerializedName("cid")
+            public int cid;
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeInt(this.cid);
+            }
+
+            public VideoAdditional() {
+            }
+
+            protected VideoAdditional(Parcel in) {
+                this.cid = in.readInt();
+            }
+
+            public static final Creator<VideoAdditional> CREATOR = new Creator<VideoAdditional>() {
+                @Override
+                public VideoAdditional createFromParcel(Parcel source) {
+                    return new VideoAdditional(source);
+                }
+
+                @Override
+                public VideoAdditional[] newArray(int size) {
+                    return new VideoAdditional[size];
+                }
+            };
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeParcelable(this.videoAdditional, flags);
+        }
+
+        public listbean() {
+        }
+
+        protected listbean(Parcel in) {
+            this.videoAdditional = in.readParcelable(VideoAdditional.class.getClassLoader());
+        }
+
+        public static final Creator<listbean> CREATOR = new Creator<listbean>() {
+            @Override
+            public listbean createFromParcel(Parcel source) {
+                return new listbean(source);
+            }
+
+            @Override
+            public listbean[] newArray(int size) {
+                return new listbean[size];
+            }
+        };
+    }
+
+ /*   list : {"0":{"page":1,"type":"vupload","part":"","cid":8444834,"vid":0}}*/
+
+
     @Override
     public int describeContents() {
         return 0;

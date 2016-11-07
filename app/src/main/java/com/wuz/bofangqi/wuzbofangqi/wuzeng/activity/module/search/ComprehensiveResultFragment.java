@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxLazeFragment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.search.adpter.ComprehensiveAdapter;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchArchiveInfo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
 
 import butterknife.Bind;
@@ -28,16 +29,19 @@ public class ComprehensiveResultFragment extends RxLazeFragment {
 
 
     private static final String EXTRA_DATA = "extra_data";
+    private static final String EXTRA_ARCHIVE = "extra_archive";
     @Bind(R.id.loading_faile)
     ImageView loadingFaile;
     @Bind(R.id.recyle)
     RecyclerView recyle;
     private SearchResult.ResultBean mResultBean;
+    private SearchArchiveInfo.DataBean mArchiveList;
 
     @Override
     protected void OnViewCreateFinish(Bundle savedInstanceState) {
         mResultBean=getArguments().getParcelable(EXTRA_DATA);
-        if (mResultBean!=null) {
+        mArchiveList = getArguments().getParcelable(EXTRA_ARCHIVE);
+        if (mArchiveList!=null) {
             initview();
         }else{
             loadingFaile.setVisibility(View.VISIBLE);
@@ -49,7 +53,7 @@ public class ComprehensiveResultFragment extends RxLazeFragment {
         recyle.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         ComprehensiveAdapter comprehensiveAdapter = new ComprehensiveAdapter(getActivity());
         recyle.setAdapter(comprehensiveAdapter);
-        comprehensiveAdapter.setAllData(mResultBean);
+        comprehensiveAdapter.setAllData(mResultBean,mArchiveList);
     }
 
     @Override
@@ -77,10 +81,11 @@ public class ComprehensiveResultFragment extends RxLazeFragment {
         ButterKnife.unbind(this);
     }
 
-    public static ComprehensiveResultFragment newInstance(SearchResult.ResultBean result) {
+    public static ComprehensiveResultFragment newInstance(SearchResult.ResultBean result,SearchArchiveInfo.DataBean dataBean) {
 
         Bundle args = new Bundle();
         args.putParcelable(EXTRA_DATA,result);
+        args.putParcelable(EXTRA_ARCHIVE,dataBean);
         ComprehensiveResultFragment fragment = new ComprehensiveResultFragment();
         fragment.setArguments(args);
         return fragment;

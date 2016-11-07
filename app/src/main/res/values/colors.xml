@@ -35,4 +35,8 @@
     <color name="pink_30">#FD7071</color>
     <color name="blue_30">#20C1FD</color>
 
+    <color name="media_controller_bg">#99000000</color>
+
+    <color name="white">#FFFFFF</color>
+
 </resources>

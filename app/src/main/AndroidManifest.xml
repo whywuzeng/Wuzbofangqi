@@ -37,6 +37,10 @@
         <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.bangumi.SeasonBangumiActivity"/>
 
         <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.BangumiDetailActivity"/>
+
+        <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.VideoDetail.VideoDetailPlayActivity"
+            android:screenOrientation="landscape"
+            />
     </application>
 
 </manifest>

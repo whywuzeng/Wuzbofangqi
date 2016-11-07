@@ -80,7 +80,7 @@ public class VideoDetailActivity extends RxAppBasecompatActivity {
 
         Intent intent = getIntent();
         if (intent!=null)
-        {
+        {//11166282
             mIntExtra = intent.getIntExtra(EXTRA_AID, -1);
             mStringExtra = intent.getStringExtra(EXTRA_URLIMG);
         }
@@ -95,18 +95,23 @@ public class VideoDetailActivity extends RxAppBasecompatActivity {
 
         getVideoInfo();
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //跳转到play
-            }
-        });
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 setViewsTranslation(verticalOffset);
 
+            }
+        });
+
+//        fab.bringToFront();  11166282
+//        fab.setFocusable(true);
+//        fab.setClickable(true);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转到play
+                VideoDetailPlayActivity.launch(VideoDetailActivity.this, mVideoDetail.list.videoAdditional.cid+"", mVideoDetail.title);
             }
         });
 
@@ -119,12 +124,12 @@ public class VideoDetailActivity extends RxAppBasecompatActivity {
                     @Override
                     public void onCompleted() {
                         LogUtil.i("onCompleted");
-                        fab.setClickable(false);
                         fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray_20)));
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        fab.setClickable(false);
                         LogUtil.i("onError" + e.getLocalizedMessage());
                     }
 

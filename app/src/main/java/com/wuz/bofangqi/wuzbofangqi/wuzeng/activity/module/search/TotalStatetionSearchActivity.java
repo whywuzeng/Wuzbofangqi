@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.facebook.stetho.common.LogUtil;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -22,6 +23,7 @@ import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.Utils.KeyBoardUtil;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.base.RxAppBasecompatActivity;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.search.adpter.SearchPageAdapter;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchArchiveInfo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.network.RetrofitHelper;
 
@@ -33,6 +35,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Observer;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -70,6 +73,9 @@ public class TotalStatetionSearchActivity extends RxAppBasecompatActivity implem
     private Fragment[] fragments=new Fragment[1];
 
     private List<String> titles=new ArrayList<>();
+    private SearchArchiveInfo.DataBean dataBean;
+
+    private  SearchPageAdapter searchPageAdapter;
 
     @Override
     public int getLayoutId() {
@@ -83,8 +89,10 @@ public class TotalStatetionSearchActivity extends RxAppBasecompatActivity implem
         Drawable drawable = getDrawable(R.drawable.search_loading_anim);
         centerLoadingImg.setImageDrawable(drawable);
         mAnimationDrawable = (AnimationDrawable) centerLoadingImg.getDrawable();
+
         getSearchData();
         search();
+        titles.add("综合");
     }
 
     private void getSearchData() {
@@ -157,24 +165,48 @@ public class TotalStatetionSearchActivity extends RxAppBasecompatActivity implem
                 .map(new Func1<Void, String>() {
                     @Override
                     public String call(Void aVoid) {
-                        return  editQuery.getText().toString().trim();
+
+                        return editQuery.getText().toString().trim();
                     }
                 }).filter(new Func1<String, Boolean>() {
-            @Override
-            public Boolean call(String s) {
-                return !TextUtils.isEmpty(s);
-            }
-        }).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<String>() {
                     @Override
-                    public void call(String s) {
-                        KeyBoardUtil.closeKeyboard(editQuery,
-                                TotalStatetionSearchActivity.this);
-                        ShowLoadAnim();
-                        SearchData(s);
+                    public Boolean call(String s) {
+                        boolean isclear=false;
+                        if (searchPageAdapter != null) {
+                             isclear=searchPageAdapter.ClearData();
+                            fragments[0]=null;
+                        }else{
+                            isclear=true;
+                        }
+                        return !TextUtils.isEmpty(s)&&isclear;
                     }
-                });
+                }).mergeWith(Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                if (searchPageAdapter != null) {
+                    searchPageAdapter.ClearData();
+                    subscriber.onNext("true");
+                }
+            }
+        })).delay(250,TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<String>() {
+                            @Override
+                            public void call(String s) {
+                                if (s.equals("true")) {
+                                    Toast.makeText(TotalStatetionSearchActivity.this, "布局清理完成", Toast.LENGTH_LONG).show();
+                                }
+                                else {
+                                    KeyBoardUtil.closeKeyboard(editQuery,
+                                            TotalStatetionSearchActivity.this);
+                                    ShowLoadAnim();
+                                    SearchData(s);
+                                }
+                            }
+                        });
     }
+
+
 
 
     /**
@@ -183,11 +215,12 @@ public class TotalStatetionSearchActivity extends RxAppBasecompatActivity implem
      * @param data
      */
     private void SearchData(String data) {
+
         int page=1;
         int count=10;
-        RetrofitHelper.getSearchResult(data, page, count)
-                .compose(this.<SearchResult>bindToLifecycle())
-                .subscribe(new Observer<SearchResult>() {
+        RetrofitHelper.getSearchArchiveInfo(data, page, count)
+                .compose(this.<SearchArchiveInfo>bindToLifecycle())
+                .subscribe(new Observer<SearchArchiveInfo>() {
                     @Override
                     public void onCompleted() {
                         LogUtil.i("onCompleted");
@@ -200,12 +233,37 @@ public class TotalStatetionSearchActivity extends RxAppBasecompatActivity implem
                     }
 
                     @Override
-                    public void onNext(SearchResult searchResult) {
-                        pageinfoBean = searchResult.pageinfo;
-                        resultBean = searchResult.result;
+                    public void onNext(SearchArchiveInfo searchResult) {
+//                        pageinfoBean = searchResult.pageinfo;
+                        dataBean = searchResult.data;
+//                        resultBean = searchResult.result;
                         finishTask();
                     }
                 });
+
+//        int page=1;
+//        int count=10;
+//        RetrofitHelper.getSearchResult(data, page, count)
+//                .compose(this.<SearchResult>bindToLifecycle())
+//                .subscribe(new Observer<SearchResult>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        LogUtil.i("onCompleted");
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        LogUtil.i("onError"+e.getLocalizedMessage());
+//                        setEmptyLayout();
+//                    }
+//
+//                    @Override
+//                    public void onNext(SearchResult searchResult) {
+//                        pageinfoBean = searchResult.pageinfo;
+//                        resultBean = searchResult.result;
+//                        finishTask();
+//                    }
+//                });
     }
 
     private void setEmptyLayout() {
@@ -216,17 +274,20 @@ public class TotalStatetionSearchActivity extends RxAppBasecompatActivity implem
 
     private void finishTask() {
         HideLayoutAnim();
-        titles.add("综合");
+
 //        titles.add("番剧"+"("+pageinfoBean.bangumi.numResults+")");
 //        titles.add("话题"+"("+pageinfoBean.topic.numResults+")");
 
-        ComprehensiveResultFragment comprehensiveResultFragment =  ComprehensiveResultFragment.newInstance(resultBean);
-        fragments[0]=comprehensiveResultFragment;
-
-        SearchPageAdapter searchPageAdapter = new SearchPageAdapter(getSupportFragmentManager(), fragments, titles);
+        ComprehensiveResultFragment comprehensiveResultFragment =  ComprehensiveResultFragment.newInstance(resultBean,dataBean);
+        fragments[0] = comprehensiveResultFragment;
+        if (searchPageAdapter!=null) {
+            searchPageAdapter = new SearchPageAdapter(getSupportFragmentManager(), fragments, titles);
+            searchPageAdapter.ClearData();
+        }else {
+            searchPageAdapter = new SearchPageAdapter(getSupportFragmentManager(), fragments, titles);
+        }
         viewPager.setAdapter(searchPageAdapter);
         slidingTabs.setViewPager(viewPager);
-        searchPageAdapter.notifyDataSetChanged();
     }
 
     private void HideLayoutAnim() {

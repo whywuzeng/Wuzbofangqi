@@ -3,6 +3,8 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.network;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.App.OhMyWuzZhibo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.BangumiDetailRecommend;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.HDVideo;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchArchiveInfo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonBangumiSerial;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonNewBangumi;
@@ -106,6 +108,21 @@ public class RetrofitHelper {
         return searchResultObservable;
     }
 
+    public static Observable<SearchArchiveInfo> getSearchArchiveInfo(String content,int page,int pagesize)
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_APP_BILI)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<SearchArchiveInfo> searchArchiveInfoObservable = build.create(BiliLiveService.class).searchArchive(content, page, pagesize)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+        return searchArchiveInfoObservable;
+    }
+
+
+
     public static Observable<VideoDetail> getVideoDetail(int sid)
     {
         Retrofit build = new Retrofit.Builder()
@@ -190,6 +207,24 @@ public class RetrofitHelper {
                 .subscribeOn(Schedulers.io());
         return bangumiDetailRecommendObservable;
 
+    }
+
+    /**
+     *  http://bilibili-service.daoapp.io/video/9253164?quality=2
+     * @return
+     */
+
+    public static Observable<HDVideo> getHDVideoApi(int cid,int quailty,String type)
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_SEARCH_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<HDVideo> hdVideoObservable = build.create(BiliLiveService.class).getHDVideo(cid, quailty, type)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+        return hdVideoObservable;
     }
 
 

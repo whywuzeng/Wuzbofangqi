@@ -1,7 +1,9 @@
 package com.wuz.bofangqi.wuzbofangqi.wuzeng.network.Api;
 
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.BangumiDetailRecommend;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.HDVideo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.LiveIndex;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchArchiveInfo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonBangumiSerial;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonNewBangumi;
@@ -39,6 +41,15 @@ public interface BiliLiveService {
      http://s.search.bilibili.com/main/hotword?access_key=ec0f54fc369d8c104ee1068672975d6a&actionKey=appkey&appkey=27eb53fc9058f8c3*/
     @GET("http://s.search.bilibili.com/main/hotword?access_key=ec0f54fc369d8c104ee1068672975d6a&actionKey=appkey&appkey=27eb53fc9058f8c3")
     Observable<hotTagsSearch> getHotTagsSearch();
+
+    //新的Search API
+   /* http://app.bilibili.com/x/v2/search?actionKey=appkey&appkey=27eb53fc9058f8c3&build=3710&device=phone&duration=0&mobi_app=iphone&order=default&platform=ios&rid=0&keyword=fate&pn=1&ps=10*/
+
+
+    @GET("x/v2/search?actionKey=appkey&appkey=27eb53fc9058f8c3&build=3710&device=phone&duration=0&mobi_app=iphone&order=default&platform=ios&rid=0")
+    Observable<SearchArchiveInfo> searchArchive(@Query("keyword") String content, @Query("pn") int page, @Query("ps") int pagesize);
+
+
 
     @FormUrlEncoded
     @POST("search")
@@ -78,5 +89,15 @@ public interface BiliLiveService {
 // bangumi detail recommend
     @GET("api/bangumi_recommend?access_key=f5bd4e793b82fba5aaf5b91fb549910a&actionKey=appkey&appkey=27eb53fc9058f8c3&build=3470&cursor=0&device=phone&mobi_app=iphone&pagesize=10&platform=ios&sign=56329a5709c401d4d7c0237f64f7943f&ts=1469613558")
     Observable<BangumiDetailRecommend> getBangumiDetailRecommend();
+
+
+/**
+ * http://bilibili-service.daoapp.io/video/9253164?quality=2
+ *
+ */
+    @GET("/video/{cid}")
+    Observable<HDVideo> getHDVideo(@Path("cid") int cid,
+                                    @Query("quailty") int quailty,
+                                   @Query("type") String type);
 
 }
