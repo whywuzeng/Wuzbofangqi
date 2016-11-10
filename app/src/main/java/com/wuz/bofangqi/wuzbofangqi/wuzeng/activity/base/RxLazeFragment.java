@@ -81,6 +81,10 @@ public abstract class RxLazeFragment extends RxFragment {
         ButterKnife.unbind(this);
     }
 
+    /**
+     * 要看这个什么时候调用
+     * @param isVisibleToUser
+     */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);

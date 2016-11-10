@@ -4,6 +4,10 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.App.OhMyWuzZhibo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.BangumiDetailRecommend;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.HDVideo;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.RegionChildInfo;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.RegionHomeInfo;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.RegionRecommendInfo;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.RegionTypeRecommendinfo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchArchiveInfo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonBangumiSerial;
@@ -225,6 +229,63 @@ public class RetrofitHelper {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
         return hdVideoObservable;
+    }
+
+    public static Observable<RegionRecommendInfo> getRegionRecommend(int rid)
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_APP_BILI)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<RegionRecommendInfo> regionRecommendInfoObservable = build.create(BiliLiveService.class)
+                .getRegionRecommends(rid)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+        return regionRecommendInfoObservable;
+
+    }
+
+    public static Observable<RegionHomeInfo> getRegionHomeInfo()
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_APP_BILI)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<RegionHomeInfo> regionHomeInfoObservable = build.create(BiliLiveService.class)
+                .getRegionHomeInfo()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+
+        return regionHomeInfoObservable;
+    }
+
+    public static Observable<RegionChildInfo> getRegionChildInfo(int rid)
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_APP_BILI)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<RegionChildInfo> regionChildInfoObservable = build.create(BiliLiveService.class)
+                .getRegionChildInfo(rid)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+        return regionChildInfoObservable;
+    }
+
+    public static Observable<RegionTypeRecommendinfo> getRegionTypeRecommendInfo(int rid)
+    {
+        Retrofit build = new Retrofit.Builder()
+                .baseUrl(BASE_APP_BILI)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        Observable<RegionTypeRecommendinfo> regionTypeRecommendinfoObservable = build.create(BiliLiveService.class).getRegionTypeRecommendInfo(rid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        return regionTypeRecommendinfoObservable;
     }
 
 

@@ -41,6 +41,8 @@
         <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.common.VideoDetail.VideoDetailPlayActivity"
             android:screenOrientation="landscape"
             />
+
+        <activity android:name="com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.region.RegionTypeDetailActivity"/>
     </application>
 
 </manifest>

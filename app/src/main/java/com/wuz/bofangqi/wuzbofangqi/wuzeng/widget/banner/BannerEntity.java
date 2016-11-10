@@ -11,6 +11,16 @@ public class BannerEntity
 
     public String title;
 
+    public BannerEntity()
+    {
+
+    }
+
+    public BannerEntity(String title, String img, String link) {
+        this.title = title;
+        this.img = img;
+        this.link = link;
+    }
 
     public String img;
 

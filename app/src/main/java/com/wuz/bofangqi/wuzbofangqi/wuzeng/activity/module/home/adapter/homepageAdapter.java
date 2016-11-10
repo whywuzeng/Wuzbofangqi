@@ -9,6 +9,7 @@ import com.wuz.bofangqi.wuzbofangqi.R;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.HomeLiveFragment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.bangumi.BangumiFragment;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.discover.HomeDiscoverFragment;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.activity.module.home.region.HomeRegionFragment;
 
 /**
  * Created by Administrator on 2016-10-11.
@@ -46,6 +47,9 @@ public class homepageAdapter extends FragmentPagerAdapter {
                     break;
                 case 2:
                     fragments[position]= HomeDiscoverFragment.newInstance();
+                    break;
+                case 3:
+                    fragments[position]= HomeRegionFragment.newInstance();
                     break;
             }
         }

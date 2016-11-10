@@ -3,6 +3,10 @@ package com.wuz.bofangqi.wuzbofangqi.wuzeng.network.Api;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.BangumiDetailRecommend;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.HDVideo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.LiveIndex;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.RegionChildInfo;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.RegionHomeInfo;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.RegionRecommendInfo;
+import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.RegionTypeRecommendinfo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchArchiveInfo;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SearchResult;
 import com.wuz.bofangqi.wuzbofangqi.wuzeng.bean.SeasonBangumiSerial;
@@ -99,5 +103,42 @@ public interface BiliLiveService {
     Observable<HDVideo> getHDVideo(@Path("cid") int cid,
                                     @Query("quailty") int quailty,
                                    @Query("type") String type);
+
+    /**
+     * <p>
+     *  * 分区推荐页面请求api
+     * </p>
+     *  http://app.bilibili.com/x/v2/region/show?access_key=67cbf6a1e9ad7d7f11bfbd918e50c837&actionKey=appkey&appkey=27eb53fc9058f8c3&build=3600&device=phone&mobi_app=iphone&plat=1&platform=ios&rid=1&sign=959d7b8c09c65e7a66f7e58b1a2bdab9&ts=1472310694
+     */
+
+    @GET("x/v2/region/show?access_key=67cbf6a1e9ad7d7f11bfbd918e50c837&actionKey=appkey&appkey=27eb53fc9058f8c3&build=3600&device=phone&mobi_app=iphone&plat=1&platform=ios&sign=959d7b8c09c65e7a66f7e58b1a2bdab9&ts=1472310694")
+    Observable<RegionRecommendInfo> getRegionRecommends(@Query("rid") int rid);
+
+    /**
+     *
+     http://app.bilibili.com/x/v2/region?access_key=f5bd4e793b82fba5aaf5b91fb549910a&actionKey=appkey&appkey=27eb53fc9058f8c3&build=3470&device=phone&mobi_app=iphone&platform=ios&sign=c76b9aa1fbcefcbd9d08b862c050d16e&ts=1469603650
+     */
+
+    @GET("x/v2/region?access_key=f5bd4e793b82fba5aaf5b91fb549910a&actionKey=appkey&appkey=27eb53fc9058f8c3&build=3470&device=phone&mobi_app=iphone&platform=ios&sign=c76b9aa1fbcefcbd9d08b862c050d16e&ts=1469603650")
+    Observable<RegionHomeInfo> getRegionHomeInfo();
+
+    /**
+     * <p>
+     * 获取分区类型详情api
+     * <p>
+     * http://app.bilibili.com/x/v2/region/show/child?build=3600&rid=24
+     */
+        @GET("x/v2/region/show/child?build=3600")
+    Observable<RegionChildInfo> getRegionChildInfo(@Query("rid") int rid);
+
+
+    /**
+     * 分区请求 recommend 推荐的API
+     * http://app.bilibili.com/x/v2/region/show?access_key=67cbf6a1e9ad7d7f11bfbd918e50c837&actionKey=appkey&appkey=27eb53fc9058f8c3&build=3600&device=phone&mobi_app=iphone&plat=1&platform=ios&rid=1&sign=959d7b8c09c65e7a66f7e58b1a2bdab9&ts=1472310694
+     *
+     */
+
+    @GET("x/v2/region/show?access_key=67cbf6a1e9ad7d7f11bfbd918e50c837&actionKey=appkey&appkey=27eb53fc9058f8c3&build=3600&device=phone&mobi_app=iphone&plat=1&platform=ios&sign=959d7b8c09c65e7a66f7e58b1a2bdab9&ts=1472310694")
+    Observable<RegionTypeRecommendinfo> getRegionTypeRecommendInfo(@Query("rid") int rid);
 
 }
