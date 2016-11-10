@@ -110,28 +110,71 @@ public class HomeRegionFragment extends RxLazeFragment implements AbsRecyclerVie
 
     @Override
     public void onItemClick(int postion, AbsRecyclerViewAdapter.ClickableViewHolder holder) {
+        RegionHomeInfo.DataBean dataBean=null;
         switch (postion){
             case 0:
                 startActivity(new Intent(getActivity(), LivePlayActivity.class));
                 break;
             case 1:
-                RegionHomeInfo.DataBean dataBean = dataBeanList.get(1);
+                dataBean = dataBeanList.get(1);
                 if (dataBean!=null)
                 {
                     RegionTypeDetailActivity.launch(getActivity(),dataBean);
                 }
                 break;
             case 2:
+
+                dataBean = dataBeanList.get(2);
+                if (dataBean!=null)
+                {
+                    RegionTypeDetailActivity.launch(getActivity(),dataBean);
+                }
+
                 break;
             case 3:
+
+                dataBean = dataBeanList.get(3);
+                if (dataBean!=null)
+                {
+                    RegionTypeDetailActivity.launch(getActivity(),dataBean);
+                }
+
                 break;
             case 4:
+
+                dataBean = dataBeanList.get(4);
+                if (dataBean!=null)
+                {
+                    RegionTypeDetailActivity.launch(getActivity(),dataBean);
+                }
+
                 break;
             case 5:
+
+                 dataBean = dataBeanList.get(5);
+                if (dataBean!=null)
+                {
+                    RegionTypeDetailActivity.launch(getActivity(),dataBean);
+                }
+
                 break;
             case 6:
+
+                dataBean = dataBeanList.get(6);
+                if (dataBean!=null)
+                {
+                    RegionTypeDetailActivity.launch(getActivity(),dataBean);
+                }
+
                 break;
             case 7:
+
+                 dataBean = dataBeanList.get(7);
+                if (dataBean!=null)
+                {
+                    RegionTypeDetailActivity.launch(getActivity(),dataBean);
+                }
+
                 break;
 
         }
